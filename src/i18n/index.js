@@ -12,7 +12,7 @@ const setIntlInstance = (intlInstance) => {
   Intl = intlInstance;
 };
 
-const setLocale = (locale) => {
+const setLocale = (locale = 'hr') => {
   activeLocale = languages.SUPPORTED_LOCALES.includes(locale) ? locale : languages.SUPPORTED_LOCALES[0];
   moment.locale(activeLocale);
   LocaleConfig.locales[activeLocale] = languages[activeLocale].calendarLocale;

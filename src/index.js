@@ -1,6 +1,5 @@
 import React from 'react';
 import SplashScreen from 'react-native-splash-screen';
-import config from 'react-native-config';
 import thunk from 'redux-thunk';
 import { Provider } from 'react-redux';
 import { Root as NativeRoot } from 'native-base';
@@ -13,7 +12,7 @@ import { setLocale, setIntlInstance } from './i18n';
 const store = createStore(reducers, applyMiddleware(thunk, middleware()));
 
 setIntlInstance(Intl);
-setLocale(config.VARIANT);
+setLocale();
 
 class Root extends React.Component {
   componentDidMount() {
