@@ -24,7 +24,7 @@ class SplashScreen extends React.Component {
         if (token) {
           navigation.navigate('PostsList', { isInitial: true });
         } else {
-          // navigation.navigate('Authentication');
+          navigation.navigate('Authentication');
         }
       });
   }
