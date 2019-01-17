@@ -1,1 +1,1 @@
-# citycoin
+# CityCoin Mobile
