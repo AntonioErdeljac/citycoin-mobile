@@ -2,7 +2,6 @@ import React from 'react';
 import { createStackNavigator } from 'react-navigation';
 
 import List from './List';
-import Search from './Search';
 import View from './View';
 
 import styles from '../common/styles';
@@ -13,9 +12,6 @@ import { _t } from '../../i18n';
 const postsRouter = createStackNavigator({
   PostsList: {
     screen: List,
-  },
-  PostsSearch: {
-    screen: Search,
   },
   PostsView: {
     screen: View,

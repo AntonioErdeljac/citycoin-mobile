@@ -1,14 +1,15 @@
 import React from 'react';
-import { View, Image } from 'react-native';
+import { View, ActivityIndicator } from 'react-native';
 
 import styles from './styles';
 
 const Loading = () => (
   <View style={styles.loading}>
-    <Image
+    {/* <Image
       source={{ uri: 'test' }}
       style={styles.image}
-    />
+    /> */}
+    <ActivityIndicator color="white" />
   </View>
 );
 

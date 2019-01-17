@@ -20,7 +20,7 @@ class PostsList extends React.Component {
       <ArticlesList
         loadOnScroll
         articles={posts}
-        articlesRoutes={['PostsSearch', 'PostsView']}
+        articlesRoutes={['PostsView']}
         clearArticlesState={clearPostsState}
         getArticles={getPosts}
         hasFailedToLoad={hasFailedToLoad}

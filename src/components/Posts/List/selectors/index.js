@@ -1,11 +1,9 @@
 import { _t } from '../../../../i18n';
 
-import images from '../../../../../assets/images';
-
 const setData = state => state.posts.data.map(post => ({
   ...post,
   description: post.description || _t('labels.undefined'),
-  imageUri: post.imageUri ? { uri: post.imageUri } : images.teamPlaceholder,
+  imageUri: { uri: post.imageUri },
   title: post.title || _t('labels.undefined'),
 }));
 
