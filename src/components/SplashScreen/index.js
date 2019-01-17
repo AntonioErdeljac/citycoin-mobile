@@ -1,6 +1,7 @@
 import PropTypes from 'prop-types';
 import React from 'react';
-import { View, AsyncStorage } from 'react-native';
+import NativeSplashScreen from 'react-native-splash-screen';
+import { View, AsyncStorage, StatusBar } from 'react-native';
 import { connect } from 'react-redux';
 
 import selectors from './selectors';
@@ -17,12 +18,13 @@ class SplashScreen extends React.Component {
   componentDidMount() {
     const { navigation } = this.props;
 
+    NativeSplashScreen.hide();
     AsyncStorage.getItem('token')
       .then((token) => {
         if (token) {
           navigation.navigate('PostsList', { isInitial: true });
         } else {
-          navigation.navigate('Authentication');
+          // navigation.navigate('Authentication');
         }
       });
   }
@@ -32,6 +34,10 @@ class SplashScreen extends React.Component {
 
     return (
       <View style={styles.center}>
+        <StatusBar
+          barStyle="light-content"
+          backgroundColor="#4E65F6"
+        />
         {
           hasFailedToLoad
             ? <Error />

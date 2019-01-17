@@ -1,5 +1,4 @@
 import React from 'react';
-// import SplashScreen from 'react-native-splash-screen';
 import thunk from 'redux-thunk';
 import { Provider } from 'react-redux';
 import { Root as NativeRoot } from 'native-base';
@@ -14,20 +13,12 @@ const store = createStore(reducers, applyMiddleware(thunk, middleware()));
 setIntlInstance(Intl);
 setLocale();
 
-class Root extends React.Component {
-  componentDidMount() {
-    // SplashScreen.hide();
-  }
-
-  render() {
-    return (
-      <Provider store={store}>
-        <NativeRoot>
-          <Router />
-        </NativeRoot>
-      </Provider>
-    );
-  }
-}
+const Root = () => (
+  <Provider store={store}>
+    <NativeRoot>
+      <Router />
+    </NativeRoot>
+  </Provider>
+);
 
 export default Root;
