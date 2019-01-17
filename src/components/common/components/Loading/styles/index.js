@@ -15,5 +15,5 @@ export default {
     unfilledColor: '#fff',
   },
 
-  image: { height: 80, width: 80 },
+  image: { height: 45, width: 45 },
 };

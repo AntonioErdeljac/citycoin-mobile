@@ -1,13 +1,13 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 import NativeSplashScreen from 'react-native-splash-screen';
-import { View, AsyncStorage, StatusBar } from 'react-native';
+import { View, AsyncStorage, StatusBar, Image } from 'react-native';
 import { connect } from 'react-redux';
 
 import selectors from './selectors';
 import styles from './styles';
 
-import { Loading, Error } from '../common/components';
+import images from '../../../assets/images';
 
 class SplashScreen extends React.Component {
   static navigationOptions = {
@@ -19,30 +19,32 @@ class SplashScreen extends React.Component {
     const { navigation } = this.props;
 
     NativeSplashScreen.hide();
-    AsyncStorage.getItem('token')
-      .then((token) => {
-        if (token) {
-          navigation.navigate('PostsList', { isInitial: true });
-        } else {
-          navigation.navigate('Authentication');
-        }
-      });
+
+    setTimeout(() => {
+      AsyncStorage.getItem('token')
+        .then((token) => {
+          if (token) {
+            navigation.navigate('PostsList', { isInitial: true });
+          } else {
+            navigation.navigate('Authentication');
+          }
+        });
+    }, 5000);
   }
 
   render() {
-    const { hasFailedToLoad } = this.props;
-
     return (
       <View style={styles.center}>
         <StatusBar
           barStyle="light-content"
           backgroundColor="#4E65F6"
         />
-        {
-          hasFailedToLoad
-            ? <Error />
-            : <Loading />
-        }
+        <View style={styles.loading}>
+          <Image
+            source={images.CCTitleSingle}
+            style={{ height: 110, width: 220, paddingRight: 10 }}
+          />
+        </View>
       </View>
     );
   }
@@ -50,7 +52,6 @@ class SplashScreen extends React.Component {
 
 SplashScreen.propTypes = {
   navigation: PropTypes.shape({}).isRequired,
-  hasFailedToLoad: PropTypes.bool.isRequired,
 };
 
 export default connect(

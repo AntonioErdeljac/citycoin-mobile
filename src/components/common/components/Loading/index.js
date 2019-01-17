@@ -1,15 +1,16 @@
 import React from 'react';
-import { View, ActivityIndicator } from 'react-native';
+import { View, Image } from 'react-native';
 
 import styles from './styles';
 
+import images from '../../../../../assets/images';
+
 const Loading = () => (
   <View style={styles.loading}>
-    {/* <Image
-      source={{ uri: 'test' }}
+    <Image
+      source={images.CCLoading}
       style={styles.image}
-    /> */}
-    <ActivityIndicator color="white" />
+    />
   </View>
 );
 
