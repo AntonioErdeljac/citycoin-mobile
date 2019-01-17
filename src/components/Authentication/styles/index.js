@@ -32,7 +32,18 @@ export default {
   subtitle: {
     fontFamily: 'Poppins-Light',
     color: 'white',
-    fontSize: 20,
+    fontSize: 15,
+    paddingTop: 20,
+  },
+
+  inputLabel: {
+    fontSize: 15,
+    color: 'white',
+    fontFamily: 'Poppins-Light',
+  },
+
+  buttonMargin: {
+    marginTop: 80,
   },
 
   input: {
@@ -47,6 +58,7 @@ export default {
   },
 
   innerContainer: {
+    borderBottomWidth: 0,
     marginTop: 25,
     display: 'flex',
     justifyContent: 'center',

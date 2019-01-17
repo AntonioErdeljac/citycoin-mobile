@@ -11,6 +11,7 @@ import { Loading, Error } from '../common/components';
 class SplashScreen extends React.Component {
   static navigationOptions = {
     drawerLabel: () => null,
+    drawerLockMode: 'locked-closed',
   }
 
   componentDidMount() {
@@ -21,7 +22,7 @@ class SplashScreen extends React.Component {
         if (token) {
           navigation.navigate('PostsList', { isInitial: true });
         } else {
-          navigation.navigate('Login');
+          navigation.navigate('Authentication');
         }
       });
   }
