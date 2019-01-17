@@ -15,24 +15,44 @@ class SplashScreen extends React.Component {
     drawerLockMode: 'locked-closed',
   }
 
+  constructor() {
+    super();
+
+    this.state = {
+      hasLoadedGif: false,
+    };
+  }
+
   componentDidMount() {
     const { navigation } = this.props;
 
     NativeSplashScreen.hide();
 
     setTimeout(() => {
-      AsyncStorage.getItem('token')
-        .then((token) => {
-          if (token) {
-            navigation.navigate('PostsList', { isInitial: true });
-          } else {
-            navigation.navigate('Authentication');
-          }
-        });
-    }, 5000);
+      this.setState({
+        hasLoadedGif: true,
+      });
+    }, 2400);
+
+    setTimeout(() => {
+      this.setState({
+        hasLoadedGif: true,
+      }, () => {
+        AsyncStorage.getItem('token')
+          .then((token) => {
+            if (token) {
+              navigation.navigate('PostsList', { isInitial: true });
+            } else {
+              navigation.navigate('Authentication');
+            }
+          });
+      });
+    }, 3000);
   }
 
   render() {
+    const { hasLoadedGif } = this.state;
+
     return (
       <View style={styles.center}>
         <StatusBar
@@ -42,7 +62,7 @@ class SplashScreen extends React.Component {
         <View style={styles.loading}>
           <Image
             source={images.CCTitleSingle}
-            style={{ height: 110, width: 220, paddingRight: 10 }}
+            style={{ height: 110, width: 220, marginRight: hasLoadedGif ? 20 : 0 }}
           />
         </View>
       </View>
