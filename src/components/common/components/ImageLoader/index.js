@@ -2,8 +2,6 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import { Image } from 'react-native';
 
-import images from '../../../../../assets/images';
-
 class ImageLoader extends React.Component {
   constructor() {
     super();
@@ -26,7 +24,7 @@ class ImageLoader extends React.Component {
     return (
       <Image
         style={style}
-        source={hasLoaded ? source : images.teamPlaceholder}
+        source={hasLoaded ? source : { uri: 'test' }}
         onLoadEnd={this.handleLoadEnd}
       />
     );

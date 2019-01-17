@@ -17,10 +17,10 @@ export default {
   },
 
   text: {
-    fontFamily: 'WorkSans-Regular', fontWeight: 'normal', color: 'gray', fontSize: 20, marginTop: 15,
+    fontFamily: 'Poppins-Regular', fontWeight: 'normal', color: 'gray', fontSize: 20, marginTop: 15,
   },
 
   sad: {
-    fontFamily: 'WorkSans-Regular', fontWeight: 'normal', color: 'gray', fontSize: 40,
+    fontFamily: 'Poppins-Regular', fontWeight: 'normal', color: 'gray', fontSize: 40,
   },
 };

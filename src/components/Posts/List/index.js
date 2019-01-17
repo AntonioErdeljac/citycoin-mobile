@@ -11,7 +11,6 @@ import actions from '../../../actions';
 class PostsList extends React.Component {
   static navigationOptions = ({ navigation }) => ({
     headerLeft: <MenuButton onPress={() => navigation.openDrawer()} name="ios-menu" />,
-    headerRight: <MenuButton right onPress={() => navigation.navigate('PostsSearch')} name="search" />,
   });
 
   render() {

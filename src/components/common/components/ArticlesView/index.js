@@ -1,5 +1,4 @@
 import * as Animatable from 'react-native-animatable';
-import HTMLView from 'react-native-htmlview';
 import PropTypes from 'prop-types';
 import React from 'react';
 import moment from 'moment';
@@ -36,7 +35,7 @@ class ArticlesView extends React.Component {
   }
 
   render() {
-    const { initialValues, hasFailedToLoad, isLoading, renderHtml } = this.props;
+    const { initialValues, hasFailedToLoad, isLoading } = this.props;
 
     let content = <Loading />;
 
@@ -62,24 +61,11 @@ class ArticlesView extends React.Component {
           </CardItem>
           <CardItem style={styles.cardItemSecondary}>
             <Body>
-              {
-                renderHtml
-                  ? (
-                    <HTMLView
-                      textComponentProps={{ style: { fontFamily: 'WorkSans-Light' } }}
-                      renderNode={node => ArticlesView.renderNode(node, initialValues)}
-                      value={initialValues.description}
-                    />
-                  )
-                  : (
-                    <Text
-                      style={styles.cardBodyText}
-                    >
-                      {initialValues.description}
-                    </Text>
-                  )
-              }
-
+              <Text
+                style={styles.cardBodyText}
+              >
+                {initialValues.description}
+              </Text>
             </Body>
           </CardItem>
         </Animatable.View>
@@ -99,12 +85,7 @@ class ArticlesView extends React.Component {
   }
 }
 
-ArticlesView.defaultProps = {
-  renderHtml: false,
-};
-
 ArticlesView.propTypes = {
-  renderHtml: PropTypes.bool,
   clearArticleState: PropTypes.func.isRequired,
   getArticle: PropTypes.func.isRequired,
   hasFailedToLoad: PropTypes.bool.isRequired,

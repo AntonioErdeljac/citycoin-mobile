@@ -3,12 +3,10 @@ import { View, Image } from 'react-native';
 
 import styles from './styles';
 
-import images from '../../../../../assets/images';
-
 const Loading = () => (
   <View style={styles.loading}>
     <Image
-      source={images.loading}
+      source={{ uri: 'test' }}
       style={styles.image}
     />
   </View>

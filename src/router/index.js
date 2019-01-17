@@ -3,11 +3,11 @@ import { createAppContainer, createDrawerNavigator } from 'react-navigation';
 import { Posts, Drawer, SplashScreen } from '../components';
 
 const Router = createDrawerNavigator({
-  SplashScreen: {
-    screen: SplashScreen,
-  },
   Posts: {
     screen: Posts,
+  },
+  SplashScreen: {
+    screen: SplashScreen,
   },
 }, {
   drawerBackgroundColor: '#fff',
@@ -16,7 +16,7 @@ const Router = createDrawerNavigator({
     activeTintColor: '#f03434',
     activeBackgroundColor: 'rgba(0,0,0,.05)',
     labelStyle: {
-      fontFamily: 'WorkSans-Light',
+      fontFamily: 'Poppins-Light',
       fontWeight: 'normal',
     },
   },

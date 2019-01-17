@@ -13,7 +13,7 @@ export default {
 
   cardBodyText: {
     paddingTop: 10,
-    fontFamily: 'WorkSans-Regular',
+    fontFamily: 'Poppins-Regular',
   },
 
   cardBodyNote: {

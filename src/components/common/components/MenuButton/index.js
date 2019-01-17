@@ -8,9 +8,10 @@ import Icon from '../Icon';
 
 const MenuButton = ({ onPress, right, name }) => (
   <TouchableOpacity onPress={() => onPress()} style={right ? styles.right : styles.left}>
-    {right
-      ? <Icon.EvilIcons name={name} size={25} />
-      : <Icon.Ionicons name={name} size={25} />
+    {
+      right
+        ? <Icon.EvilIcons name={name} size={25} />
+        : <Icon.Ionicons name={name} size={25} />
     }
   </TouchableOpacity>
 );

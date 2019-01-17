@@ -37,7 +37,7 @@ export default {
   },
 
   text: {
-    fontFamily: 'WorkSans-ExtraLight',
+    fontFamily: 'Poppins-ExtraLight',
     fontWeight: '400',
     color: 'white',
     fontSize: 20,
@@ -66,7 +66,7 @@ export default {
 
   footerText: {
     fontSize: 11,
-    fontFamily: 'WorkSans-Light',
+    fontFamily: 'Poppins-Light',
     fontWeight: 'normal',
     color: 'rgba(0,0,0,.8)',
   },

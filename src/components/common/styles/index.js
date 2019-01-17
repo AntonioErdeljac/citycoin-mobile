@@ -1,6 +1,6 @@
 export default {
   headerTitleStyle: {
-    fontFamily: 'WorkSans-Light',
+    fontFamily: 'Poppins-Light',
     fontWeight: 'normal',
   },
 };
