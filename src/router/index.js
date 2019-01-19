@@ -3,11 +3,11 @@ import { createAppContainer, createDrawerNavigator } from 'react-navigation';
 import { Authentication, Posts, Drawer, SplashScreen } from '../components';
 
 const Router = createDrawerNavigator({
-  SplashScreen: {
-    screen: SplashScreen,
-  },
   Authentication: {
     screen: Authentication,
+  },
+  SplashScreen: {
+    screen: SplashScreen,
   },
   Posts: {
     screen: Posts,

@@ -30,16 +30,17 @@ export default {
   },
 
   subtitle: {
-    fontFamily: 'Poppins-Light',
-    color: 'white',
+    fontFamily: 'Poppins-Medium',
+    color: '#4E65F6',
     fontSize: 15,
     paddingTop: 20,
+    textAlign: 'center',
   },
 
   inputLabel: {
     fontSize: 15,
-    color: 'white',
-    fontFamily: 'Poppins-Light',
+    color: 'rgba(0,0,0,.6)',
+    fontFamily: 'Poppins-Medium',
   },
 
   buttonMargin: {
@@ -50,16 +51,22 @@ export default {
     backgroundColor: 'transparent',
     width: '100%',
     fontSize: 15,
-    color: 'white',
-    fontFamily: 'Poppins-Light',
-    borderBottomWidth: 1,
-    borderBottomColor: 'white',
-    padding: 5,
+    padding: 10,
+    paddingLeft: 20,
+    color: 'rgba(0,0,0,.6)',
+    fontFamily: 'Poppins-Medium',
   },
 
   innerContainer: {
     borderBottomWidth: 0,
+    backgroundColor: 'white',
+    borderRadius: 5,
     marginTop: 25,
+    width: '100%',
+  },
+
+  buttonContainer: {
+    borderBottomWidth: 0,
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
@@ -68,10 +75,10 @@ export default {
   },
 
   button: {
-    borderRadius: 10,
+    borderRadius: 5,
     padding: 10,
     width: '100%',
-    backgroundColor: 'white',
+    backgroundColor: '#4E65F6',
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
@@ -79,7 +86,7 @@ export default {
 
   buttonText: {
     fontSize: 15,
-    color: '#4E65F6',
+    color: 'white',
     fontFamily: 'Poppins-Medium',
   },
 

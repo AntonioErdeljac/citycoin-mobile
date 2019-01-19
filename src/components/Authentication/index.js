@@ -1,10 +1,11 @@
 import React from 'react';
 import { Formik } from 'formik';
-import { Input, Item, Label } from 'native-base';
 import { View, Text, TouchableOpacity, ImageBackground, Image } from 'react-native';
 
 import styles from './styles';
 import schema from './schema';
+
+import { Input } from '../common/components';
 
 import images from '../../../assets/images';
 
@@ -13,25 +14,7 @@ class Authentication extends React.Component {
     header: () => null,
   }
 
-  constructor() {
-    super();
-
-    this.state = {
-      form: 'login',
-    };
-  }
-
-  toggleForm = () => {
-    const { form } = this.state;
-
-    this.setState({
-      form: form === 'register' ? 'login' : 'register',
-    });
-  }
-
   render() {
-    const { form } = this.state;
-
     return (
       <ImageBackground
         source={images.bg}
@@ -51,40 +34,30 @@ class Authentication extends React.Component {
             onSubmit={() => {}}
             render={props => (
               <React.Fragment>
-                <Item
-                  style={styles.innerContainer}
-                  floatingLabel
-                >
-                  <Label style={styles.inputLabel}>Email</Label>
-                  <Input
-                    onChangeText={text => props.setFieldValue('email', text)}
-                    value={props.values.email}
-                    style={styles.input}
-                    autoCapitalize="none"
-                    name="email"
-                  />
-                </Item>
-                <Item style={styles.innerContainer} floatingLabel>
-                  <Label style={styles.inputLabel}>Password</Label>
-                  <Input
-                    onChangeText={text => props.setFieldValue('password', text)}
-                    value={props.values.password}
-                    style={styles.input}
-                    name="password"
-                    secureTextEntry
-                  />
-                </Item>
-                <View style={[styles.innerContainer, styles.buttonMargin]}>
-                  <TouchableOpacity onPress={props.handleSubmit} style={styles.button}>
-                    <Text style={styles.buttonText}>{form === 'register' ? 'Sign Up' : 'Sign In'}</Text>
+                <Input
+                  {...props}
+                  name="email"
+                  placeholder="Email"
+                />
+                <Input
+                  {...props}
+                  name="password"
+                  placeholder="Password"
+                  secureTextEntry
+                />
+                <View style={[{ padding: 10, borderRadius: 5, backgroundColor: 'white' }, styles.buttonMargin]}>
+                  <View style={[styles.buttonContainer]}>
+                    <TouchableOpacity onPress={props.handleSubmit} style={styles.button}>
+                      <Text style={styles.buttonText}>Sign In</Text>
+                    </TouchableOpacity>
+                  </View>
+                  <TouchableOpacity onPress={this.toggleForm}>
+                    <Text style={styles.subtitle}>Need an account?</Text>
                   </TouchableOpacity>
                 </View>
               </React.Fragment>
             )}
           />
-          <TouchableOpacity onPress={this.toggleForm}>
-            <Text style={styles.subtitle}>{form === 'register' ? 'Already have an account?' : "Don't have an account?"}</Text>
-          </TouchableOpacity>
         </View>
       </ImageBackground>
     );
