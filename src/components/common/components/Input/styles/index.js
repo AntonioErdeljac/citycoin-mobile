@@ -22,4 +22,12 @@ export default {
     marginTop: 25,
     width: '100%',
   },
+
+  innerContainerDisabled: {
+    borderBottomWidth: 0,
+    backgroundColor: '#ecf0f1',
+    borderRadius: 5,
+    marginTop: 25,
+    width: '100%',
+  },
 };

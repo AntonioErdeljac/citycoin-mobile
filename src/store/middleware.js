@@ -57,6 +57,5 @@ export default () => ({ dispatch, getState }) => next => (action) => {
         next({ ...rest, error, type: FAILURE });
         return Promise.reject(error);
       },
-    )
-    .catch(error => error);
+    );
 };

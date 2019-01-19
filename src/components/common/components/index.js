@@ -7,3 +7,5 @@ export { default as ImageLoader } from './ImageLoader';
 export { default as Input } from './Input';
 export { default as Loading } from './Loading';
 export { default as MenuButton } from './MenuButton';
+export { default as SubmitButton } from './SubmitButton';
+export { default as AnimatedWrapper } from './AnimatedWrapper';

@@ -1,6 +1,8 @@
 import * as Yup from 'yup';
 
-const schema = Yup.object().shape({
+const initialValues = { email: '', password: '' };
+
+const validations = Yup.object().shape({
   email: Yup.string()
     .email('Invalid email')
     .required('Required'),
@@ -8,4 +10,7 @@ const schema = Yup.object().shape({
     .required('Required'),
 });
 
-export default schema;
+export default {
+  initialValues,
+  validations,
+};

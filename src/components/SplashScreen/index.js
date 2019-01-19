@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 import NativeSplashScreen from 'react-native-splash-screen';
-import { View, AsyncStorage, StatusBar, Image } from 'react-native';
+import { View, AsyncStorage, StatusBar, Image, ImageBackground } from 'react-native';
 import { connect } from 'react-redux';
 
 import selectors from './selectors';
@@ -54,18 +54,23 @@ class SplashScreen extends React.Component {
     const { hasLoadedGif } = this.state;
 
     return (
-      <View style={styles.center}>
-        <StatusBar
-          barStyle="light-content"
-          backgroundColor="#4E65F6"
-        />
-        <View style={styles.loading}>
-          <Image
-            source={images.CCTitleSingle}
-            style={{ height: 110, width: 220, marginRight: hasLoadedGif ? 20 : 0 }}
+      <ImageBackground
+        source={images.bg}
+        style={styles.background}
+      >
+        <View style={styles.center}>
+          <StatusBar
+            barStyle="light-content"
+            backgroundColor="#4E65F6"
           />
+          <View style={styles.loading}>
+            <Image
+              source={images.CCTitleSingle}
+              style={{ height: 110, width: 220, marginRight: hasLoadedGif ? 20 : 0 }}
+            />
+          </View>
         </View>
-      </View>
+      </ImageBackground>
     );
   }
 }
