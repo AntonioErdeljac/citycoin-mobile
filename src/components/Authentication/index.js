@@ -1,8 +1,10 @@
 import React from 'react';
-import { View, Text, TouchableOpacity, ImageBackground, Image } from 'react-native';
+import { Formik } from 'formik';
 import { Input, Item, Label } from 'native-base';
+import { View, Text, TouchableOpacity, ImageBackground, Image } from 'react-native';
 
 import styles from './styles';
+import schema from './schema';
 
 import images from '../../../assets/images';
 
@@ -30,40 +32,6 @@ class Authentication extends React.Component {
   render() {
     const { form } = this.state;
 
-    const formContent = form === 'login'
-      ? (
-        <React.Fragment>
-          <Item style={styles.innerContainer} floatingLabel>
-            <Label style={styles.inputLabel}>Email</Label>
-            <Input style={styles.input} autoCapitalize="none" />
-          </Item>
-          <Item style={styles.innerContainer} floatingLabel>
-            <Label style={styles.inputLabel}>Password</Label>
-            <Input style={styles.input} secureTextEntry />
-          </Item>
-        </React.Fragment>
-      )
-      : (
-        <React.Fragment>
-          <Item style={styles.innerContainer} floatingLabel>
-            <Label style={styles.inputLabel}>First name</Label>
-            <Input style={styles.input} autoCapitalize="none" />
-          </Item>
-          <Item style={styles.innerContainer} floatingLabel>
-            <Label style={styles.inputLabel}>Last name</Label>
-            <Input style={styles.input} autoCapitalize="none" />
-          </Item>
-          <Item style={styles.innerContainer} floatingLabel>
-            <Label style={styles.inputLabel}>Email</Label>
-            <Input style={styles.input} autoCapitalize="none" />
-          </Item>
-          <Item style={styles.innerContainer} floatingLabel>
-            <Label style={styles.inputLabel}>Password</Label>
-            <Input style={styles.input} secureTextEntry />
-          </Item>
-        </React.Fragment>
-      );
-
     return (
       <ImageBackground
         source={images.bg}
@@ -77,12 +45,43 @@ class Authentication extends React.Component {
             />
             <Text style={styles.title}>CityCoin</Text>
           </View>
-          {formContent}
-          <View style={[styles.innerContainer, styles.buttonMargin]}>
-            <TouchableOpacity style={styles.button}>
-              <Text style={styles.buttonText}>{form === 'register' ? 'Sign Up' : 'Sign In'}</Text>
-            </TouchableOpacity>
-          </View>
+          <Formik
+            initialValues={{ email: '', password: '' }}
+            validationSchema={schema}
+            onSubmit={() => {}}
+            render={props => (
+              <React.Fragment>
+                <Item
+                  style={styles.innerContainer}
+                  floatingLabel
+                >
+                  <Label style={styles.inputLabel}>Email</Label>
+                  <Input
+                    onChangeText={text => props.setFieldValue('email', text)}
+                    value={props.values.email}
+                    style={styles.input}
+                    autoCapitalize="none"
+                    name="email"
+                  />
+                </Item>
+                <Item style={styles.innerContainer} floatingLabel>
+                  <Label style={styles.inputLabel}>Password</Label>
+                  <Input
+                    onChangeText={text => props.setFieldValue('password', text)}
+                    value={props.values.password}
+                    style={styles.input}
+                    name="password"
+                    secureTextEntry
+                  />
+                </Item>
+                <View style={[styles.innerContainer, styles.buttonMargin]}>
+                  <TouchableOpacity onPress={props.handleSubmit} style={styles.button}>
+                    <Text style={styles.buttonText}>{form === 'register' ? 'Sign Up' : 'Sign In'}</Text>
+                  </TouchableOpacity>
+                </View>
+              </React.Fragment>
+            )}
+          />
           <TouchableOpacity onPress={this.toggleForm}>
             <Text style={styles.subtitle}>{form === 'register' ? 'Already have an account?' : "Don't have an account?"}</Text>
           </TouchableOpacity>

@@ -8,6 +8,7 @@
   },
   "dependencies": {
     "axios": "0.18.0",
+    "formik": "1.4.2",
     "keymirror": "0.1.1",
     "lodash": "4.17.11",
     "moment": "2.23.0",
@@ -23,7 +24,8 @@
     "react-navigation": "3.0.9",
     "react-redux": "6.0.0",
     "redux": "4.0.1",
-    "redux-thunk": "2.3.0"
+    "redux-thunk": "2.3.0",
+    "yup": "0.26.7"
   },
   "devDependencies": {
     "babel-eslint": "10.0.1",
