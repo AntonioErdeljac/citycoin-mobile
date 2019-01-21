@@ -26,7 +26,7 @@ class Dashboard extends React.Component {
             <MenuButton onPress={() => navigation.openDrawer()} left name="bars" />
           </Left>
           <Body style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', paddingTop: 10 }}>
-            <Title style={{ fontFamily: 'Poppins-Bold', color: '#2C2D4C' }}>Antonio</Title>
+            <Title style={{ fontFamily: 'Poppins-Bold', color: '#2C2D4C' }}>Rijeka</Title>
           </Body>
           <Right style={{ paddingTop: 5 }}>
             <Thumbnail
