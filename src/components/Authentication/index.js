@@ -98,8 +98,10 @@ class Authentication extends React.Component {
   }
 
   toggleForm = () => {
+    const { clearAuthenticationState } = this.props;
     const { activeForm } = this.state;
 
+    clearAuthenticationState();
     this.mainRef.fadeOutUp()
       .then(() => {
         this.setState({
