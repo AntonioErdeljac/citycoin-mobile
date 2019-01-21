@@ -1,17 +1,16 @@
 import * as Animatable from 'react-native-animatable';
 import PropTypes from 'prop-types';
 import React from 'react';
-import { Formik } from 'formik';
 import { View, Text, TouchableOpacity, ImageBackground, Image } from 'react-native';
 import { connect } from 'react-redux';
 import { isEmpty } from 'lodash';
-
 import { Thumbnail } from 'native-base';
-import schema from './schema';
+
 import selectors from './selectors';
 import styles from './styles';
+import { Login, Register } from './components';
 
-import { Input, SubmitButton, AnimatedWrapper } from '../common/components';
+import { SubmitButton } from '../common/components';
 
 import actions from '../../actions';
 
@@ -28,48 +27,68 @@ class Authentication extends React.Component {
     this.state = {
       isWelcomeVisible: false,
       isFormVisible: true,
+      activeForm: 'login',
     };
 
-    this.formRef = React.createRef();
-    this.welcomeRef = React.createRef();
+    this.mainRef = React.createRef();
   }
 
   handleSubmit = (values) => {
-    const { login } = this.props;
+    const { login, register } = this.props;
+    const { activeForm } = this.state;
 
-    login(values)
-      .then(() => {
-        this.setState({
-          isFormVisible: false,
-        }, () => {
-          this.titleRef.fadeOutUp()
+    if (activeForm === 'login') {
+      login(values)
+        .then(() => {
+          this.mainRef.fadeOutUp()
             .then(() => {
               this.setState({
-                isWelcomeVisible: true,
+                isFormVisible: false,
               }, () => {
-                this.titleRef.fadeInDown();
+                this.setState({
+                  isWelcomeVisible: true,
+                }, () => {
+                  this.mainRef.fadeInDown();
+                });
               });
             });
         });
-      });
+    } else {
+      register(values)
+        .then(() => {
+          this.mainRef.fadeOutUp()
+            .then(() => {
+              this.setState({
+                isFormVisible: false,
+                activeForm: 'login',
+              }, () => {
+                this.setState({
+                  isFormVisible: true,
+                }, () => {
+                  this.mainRef.fadeInDown();
+                });
+              });
+            });
+        });
+    }
   }
 
   handleLogout = () => {
     const { clearAuthenticationState } = this.props;
 
-    this.setState({
-      isWelcomeVisible: false,
-    }, () => {
-      this.titleRef.fadeOutUp()
-        .then(() => {
+    this.mainRef.fadeOutUp()
+      .then(() => {
+        this.setState({
+          isWelcomeVisible: false,
+        }, () => {
           clearAuthenticationState();
           this.setState({
             isFormVisible: true,
           }, () => {
-            this.titleRef.fadeInDown();
+            this.mainRef.fadeInDown();
           });
         });
-    });
+      });
   }
 
   setTitleRef = (ref) => {
@@ -78,9 +97,40 @@ class Authentication extends React.Component {
     }
   }
 
+  toggleForm = () => {
+    const { activeForm } = this.state;
+
+    this.mainRef.fadeOutUp()
+      .then(() => {
+        this.setState({
+          activeForm: activeForm === 'login' ? 'register' : 'login',
+        }, () => {
+          this.mainRef.fadeInDown();
+        });
+      });
+  }
+
   render() {
     const { isSubmitting, hasFailedToSubmit, currentUser, navigation } = this.props;
-    const { isWelcomeVisible, isFormVisible } = this.state;
+    const { isWelcomeVisible, isFormVisible, activeForm } = this.state;
+
+    const formContent = activeForm === 'login'
+      ? (
+        <Login
+          hasFailedToSubmit={hasFailedToSubmit}
+          isSubmitting={isSubmitting}
+          toggleForm={this.toggleForm}
+          handleOnSubmit={this.handleSubmit}
+        />
+      )
+      : (
+        <Register
+          hasFailedToSubmit={hasFailedToSubmit}
+          isSubmitting={isSubmitting}
+          toggleForm={this.toggleForm}
+          handleOnSubmit={this.handleSubmit}
+        />
+      );
 
     const welcomeContent = !isEmpty(currentUser)
       ? (
@@ -102,14 +152,29 @@ class Authentication extends React.Component {
       )
       : null;
 
+    const welcomeContentToggle = isWelcomeVisible
+      ? (
+        <View style={styles.welcomeContent}>
+          {welcomeContent}
+        </View>
+      )
+      : null;
+
+    const formContentToggle = isFormVisible
+      ? (
+        <View>
+          {formContent}
+        </View>
+      )
+      : null;
+
     return (
       <ImageBackground
         source={images.bg}
         style={styles.background}
       >
-        <View style={styles.container}>
-          <Animatable.View
-            animation="fadeInUp"
+        <Animatable.View animation="fadeInUp" ref={(ref) => { this.mainRef = ref; }} style={styles.container}>
+          <View
             ref={this.setTitleRef}
             style={styles.titleContainer}
           >
@@ -118,57 +183,10 @@ class Authentication extends React.Component {
               style={styles.image}
             />
             <Text style={styles.title}>CityCoin</Text>
-          </Animatable.View>
-          <AnimatedWrapper
-            style={styles.welcomeContainer}
-            isVisible={isWelcomeVisible}
-          >
-            <View style={styles.welcomeContent}>
-              {welcomeContent}
-            </View>
-          </AnimatedWrapper>
-          <AnimatedWrapper
-            isVisible={isFormVisible}
-          >
-            <Formik
-              initialValues={schema.initialValues}
-              validationSchema={schema.validations}
-              onSubmit={this.handleSubmit}
-              render={props => (
-                <React.Fragment>
-                  <Input
-                    {...props}
-                    disabled={isSubmitting}
-                    name="email"
-                    placeholder="Email"
-                    hasFailedToSubmit={hasFailedToSubmit}
-                  />
-                  <Input
-                    {...props}
-                    name="password"
-                    disabled={isSubmitting}
-                    placeholder="Password"
-                    secureTextEntry
-                    hasFailedToSubmit={hasFailedToSubmit}
-                  />
-
-                  <View style={[styles.buttonsContent, styles.buttonMargin]}>
-                    <View style={[styles.buttonContainer]}>
-                      <SubmitButton
-                        onPress={props.handleSubmit}
-                        isSubmitting={isSubmitting}
-                        label="Sign in"
-                      />
-                    </View>
-                    <TouchableOpacity onPress={this.toggleForm}>
-                      <Text style={styles.subtitle}>Need an account?</Text>
-                    </TouchableOpacity>
-                  </View>
-                </React.Fragment>
-              )}
-            />
-          </AnimatedWrapper>
-        </View>
+          </View>
+          {welcomeContentToggle}
+          {formContentToggle}
+        </Animatable.View>
       </ImageBackground>
     );
   }
@@ -181,6 +199,7 @@ Authentication.propTypes = {
   isSubmitting: PropTypes.bool.isRequired,
   login: PropTypes.func.isRequired,
   navigation: PropTypes.shape({}).isRequired,
+  register: PropTypes.func.isRequired,
 };
 
 export default connect(

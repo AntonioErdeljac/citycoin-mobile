@@ -5,4 +5,5 @@ export default {
   },
 
   AUTHENTICATION_LOGIN: '/api/v1/authentication/login',
+  AUTHENTICATION_REGISTER: '/api/v1/authentication/registration',
 };

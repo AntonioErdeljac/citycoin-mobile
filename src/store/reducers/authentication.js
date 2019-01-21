@@ -27,6 +27,24 @@ const actionMap = {
     isSubmitting: false,
     hasFailedToSubmit: true,
   }),
+
+  [actions.AUTHENTICATION_REGISTER_REQUEST]: state => ({
+    ...state,
+    isSubmitting: true,
+    hasFailedToSubmit: false,
+  }),
+
+  [actions.AUTHENTICATION_REGISTER_SUCCESS]: state => ({
+    ...state,
+    isSubmitting: false,
+    hasFailedToSubmit: false,
+  }),
+
+  [actions.AUTHENTICATION_REGISTER_FAILURE]: state => ({
+    ...state,
+    isSubmitting: false,
+    hasFailedToSubmit: true,
+  }),
 };
 
 export default (state = initialState, action) => {

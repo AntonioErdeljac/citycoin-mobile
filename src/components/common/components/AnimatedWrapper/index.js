@@ -18,9 +18,6 @@ class AnimatedWrapper extends React.Component {
       this.setState({
         visible: true,
       }, () => {
-        if (this.viewRef) {
-          this.viewRef.fadeInUp();
-        }
       });
     } else if (isVisible && !newProps.isVisible) {
       this.viewRef.fadeOutDown()
@@ -56,7 +53,12 @@ class AnimatedWrapper extends React.Component {
   }
 }
 
+AnimatedWrapper.defaultProps = {
+  style: {},
+};
+
 AnimatedWrapper.propTypes = {
+  style: PropTypes.shape({}),
   children: PropTypes.element.isRequired,
   isVisible: PropTypes.bool.isRequired,
 };

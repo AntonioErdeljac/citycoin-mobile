@@ -13,4 +13,15 @@ export default {
       promise: client => client.post(paths.AUTHENTICATION_LOGIN, { email, password }),
     },
   }),
+
+  register: values => ({
+    [actions.API_CALL]: {
+      types: [
+        actions.AUTHENTICATION_REGISTER_REQUEST,
+        actions.AUTHENTICATION_REGISTER_SUCCESS,
+        actions.AUTHENTICATION_REGISTER_FAILURE,
+      ],
+      promise: client => client.post(paths.AUTHENTICATION_REGISTER, values),
+    },
+  }),
 };
