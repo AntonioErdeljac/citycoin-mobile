@@ -11,7 +11,7 @@ const MenuButton = ({ onPress, right, name }) => (
     {
       right
         ? <Icon.EvilIcons name={name} size={25} />
-        : <Icon.Ionicons name={name} size={25} />
+        : <Icon.FontAwesome name={name} size={20} color="#2C2D4C" />
     }
   </TouchableOpacity>
 );

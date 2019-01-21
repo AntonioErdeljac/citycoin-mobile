@@ -47,6 +47,40 @@ export default {
     marginTop: 80,
   },
 
+  welcomeContent: {
+    padding: 20,
+    borderRadius: 5,
+    backgroundColor: 'white',
+    width: '100%',
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+
+  welcomeContainer: {
+    width: '100%',
+    alignSelf: 'center',
+  },
+
+  welcomeContentText: {
+    fontFamily: 'Poppins-Medium',
+    color: 'rgba(0,0,0,.6)',
+    paddingTop: 15,
+    fontSize: 20,
+    marginBottom: 15,
+  },
+
+  welcomeContentImage: {
+    borderColor: 'white',
+    borderWidth: 2,
+  },
+
+  buttonsContent: {
+    padding: 20,
+    borderRadius: 5,
+    backgroundColor: 'white',
+  },
+
   input: {
     backgroundColor: 'transparent',
     width: '100%',

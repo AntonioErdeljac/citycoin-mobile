@@ -1,10 +1,12 @@
-import PropTypes from 'prop-types';
 import * as Animatable from 'react-native-animatable';
+import PropTypes from 'prop-types';
 import React from 'react';
 import { Formik } from 'formik';
 import { View, Text, TouchableOpacity, ImageBackground, Image } from 'react-native';
 import { connect } from 'react-redux';
+import { isEmpty } from 'lodash';
 
+import { Thumbnail } from 'native-base';
 import schema from './schema';
 import selectors from './selectors';
 import styles from './styles';
@@ -34,12 +36,13 @@ class Authentication extends React.Component {
 
   handleSubmit = (values) => {
     const { login } = this.props;
+
     login(values)
       .then(() => {
         this.setState({
           isFormVisible: false,
         }, () => {
-          this.titleRef.fadeOut()
+          this.titleRef.fadeOutUp()
             .then(() => {
               this.setState({
                 isWelcomeVisible: true,
@@ -51,9 +54,53 @@ class Authentication extends React.Component {
       });
   }
 
+  handleLogout = () => {
+    const { clearAuthenticationState } = this.props;
+
+    this.setState({
+      isWelcomeVisible: false,
+    }, () => {
+      this.titleRef.fadeOutUp()
+        .then(() => {
+          clearAuthenticationState();
+          this.setState({
+            isFormVisible: true,
+          }, () => {
+            this.titleRef.fadeInDown();
+          });
+        });
+    });
+  }
+
+  setTitleRef = (ref) => {
+    if (ref) {
+      this.titleRef = ref;
+    }
+  }
+
   render() {
-    const { isSubmitting, hasFailedToSubmit } = this.props;
+    const { isSubmitting, hasFailedToSubmit, currentUser, navigation } = this.props;
     const { isWelcomeVisible, isFormVisible } = this.state;
+
+    const welcomeContent = !isEmpty(currentUser)
+      ? (
+        <React.Fragment>
+          <Thumbnail
+            source={{ uri: 'https://avatars2.githubusercontent.com/u/23248726?s=460&v=4' }}
+            large
+            style={styles.welcomeContentImage}
+          />
+          <Text style={styles.welcomeContentText}>{currentUser.personal.firstName} {currentUser.personal.lastName}</Text>
+          <SubmitButton
+            onPress={() => navigation.navigate('Dashboard')}
+            label="Continue"
+          />
+          <TouchableOpacity onPress={this.handleLogout}>
+            <Text style={styles.subtitle}>Logout</Text>
+          </TouchableOpacity>
+        </React.Fragment>
+      )
+      : null;
 
     return (
       <ImageBackground
@@ -63,11 +110,7 @@ class Authentication extends React.Component {
         <View style={styles.container}>
           <Animatable.View
             animation="fadeInUp"
-            ref={(ref) => {
-              if (ref) {
-                this.titleRef = ref;
-              }
-            }}
+            ref={this.setTitleRef}
             style={styles.titleContainer}
           >
             <Image
@@ -77,22 +120,11 @@ class Authentication extends React.Component {
             <Text style={styles.title}>CityCoin</Text>
           </Animatable.View>
           <AnimatedWrapper
-            style={{ width: '100%', alignSelf: 'center' }}
+            style={styles.welcomeContainer}
             isVisible={isWelcomeVisible}
           >
-            <View style={[{ padding: 20, borderRadius: 5, backgroundColor: 'white', width: '100%', display: 'flex', justifyContent: 'center', alignItems: 'center' }]}>
-              <Image
-                source={{ uri: 'http://wilkinsonschool.org/wp-content/uploads/2018/10/user-default-grey.png' }}
-                style={{ height: 100, width: 100 }}
-              />
-              <Text style={{ fontFamily: 'Poppins-Medium', color: 'rgba(0,0,0,.6)', paddingTop: 15, fontSize: 20, marginBottom: 15 }}>Antonio Erdeljac</Text>
-              <SubmitButton
-                onPress={() => {}}
-                label="Continue"
-              />
-              <TouchableOpacity onPress={this.toggleForm}>
-                <Text style={styles.subtitle}>Logout</Text>
-              </TouchableOpacity>
+            <View style={styles.welcomeContent}>
+              {welcomeContent}
             </View>
           </AnimatedWrapper>
           <AnimatedWrapper
@@ -120,7 +152,7 @@ class Authentication extends React.Component {
                     hasFailedToSubmit={hasFailedToSubmit}
                   />
 
-                  <View style={[{ padding: 20, borderRadius: 5, backgroundColor: 'white' }, styles.buttonMargin]}>
+                  <View style={[styles.buttonsContent, styles.buttonMargin]}>
                     <View style={[styles.buttonContainer]}>
                       <SubmitButton
                         onPress={props.handleSubmit}
@@ -143,9 +175,12 @@ class Authentication extends React.Component {
 }
 
 Authentication.propTypes = {
+  clearAuthenticationState: PropTypes.func.isRequired,
+  currentUser: PropTypes.shape({}).isRequired,
   hasFailedToSubmit: PropTypes.bool.isRequired,
   isSubmitting: PropTypes.bool.isRequired,
   login: PropTypes.func.isRequired,
+  navigation: PropTypes.shape({}).isRequired,
 };
 
 export default connect(

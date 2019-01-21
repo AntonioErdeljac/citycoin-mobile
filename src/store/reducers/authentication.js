@@ -3,6 +3,7 @@ import { actions } from '../../constants';
 const initialState = {
   hasFailedToSubmit: false,
   isSubmitting: false,
+  currentUser: {},
 };
 
 const actionMap = {
@@ -14,10 +15,11 @@ const actionMap = {
     hasFailedToSubmit: false,
   }),
 
-  [actions.AUTHENTICATION_LOGIN_SUCCESS]: state => ({
+  [actions.AUTHENTICATION_LOGIN_SUCCESS]: (state, { result }) => ({
     ...state,
     isSubmitting: false,
     hasFailedToSubmit: false,
+    currentUser: result.data,
   }),
 
   [actions.AUTHENTICATION_LOGIN_FAILURE]: state => ({
