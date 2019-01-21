@@ -1,5 +1,6 @@
+import * as Animatable from 'react-native-animatable';
 import React from 'react';
-import { View, Text, ScrollView, TouchableOpacity } from 'react-native';
+import { View, Text, ScrollView, TouchableOpacity, Dimensions } from 'react-native';
 import { Header, Body, Title, Right, Thumbnail, Left } from 'native-base';
 
 import styles from './styles';
@@ -10,14 +11,16 @@ class Dashboard extends React.Component {
   constructor() {
     super();
 
-    console.log('dashboard');
+    this.state = {
+      isAnimationVisible: true,
+    };
   }
 
   render() {
     const { navigation } = this.props;
 
     return (
-      <View style={styles.container}>
+      <Animatable.View animation="fadeInDown" ref={(ref) => { this.mainRef = ref; }} style={styles.container}>
         <Header transparent>
           <Left>
             <MenuButton onPress={() => navigation.openDrawer()} left name="bars" />
@@ -95,7 +98,7 @@ class Dashboard extends React.Component {
             </ScrollView>
           </View>
         </ScrollView>
-      </View>
+      </Animatable.View>
     );
   }
 }

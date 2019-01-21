@@ -112,8 +112,17 @@ class Authentication extends React.Component {
       });
   }
 
+  handleNavigate = () => {
+    const { navigation } = this.props;
+
+    this.mainRef.fadeOutUp()
+      .then(() => {
+        navigation.navigate('Dashboard');
+      });
+  }
+
   render() {
-    const { isSubmitting, hasFailedToSubmit, currentUser, navigation } = this.props;
+    const { isSubmitting, hasFailedToSubmit, currentUser } = this.props;
     const { isWelcomeVisible, isFormVisible, activeForm } = this.state;
 
     const formContent = activeForm === 'login'
@@ -144,7 +153,7 @@ class Authentication extends React.Component {
           />
           <Text style={styles.welcomeContentText}>{currentUser.personal.firstName} {currentUser.personal.lastName}</Text>
           <SubmitButton
-            onPress={() => navigation.navigate('Dashboard')}
+            onPress={this.handleNavigate}
             label="Continue"
           />
           <TouchableOpacity onPress={this.handleLogout}>
