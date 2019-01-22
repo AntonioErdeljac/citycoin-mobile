@@ -28,6 +28,25 @@ const actionMap = {
     hasFailedToSubmit: true,
   }),
 
+  [actions.AUTHENTICATION_LOGIN_TOKEN_REQUEST]: state => ({
+    ...state,
+    isSubmitting: true,
+    hasFailedToSubmit: false,
+  }),
+
+  [actions.AUTHENTICATION_LOGIN_TOKEN_SUCCESS]: (state, { result }) => ({
+    ...state,
+    isSubmitting: false,
+    hasFailedToSubmit: false,
+    currentUser: result.data,
+  }),
+
+  [actions.AUTHENTICATION_LOGIN_TOKEN_FAILURE]: state => ({
+    ...state,
+    isSubmitting: false,
+    hasFailedToSubmit: true,
+  }),
+
   [actions.AUTHENTICATION_REGISTER_REQUEST]: state => ({
     ...state,
     isSubmitting: true,

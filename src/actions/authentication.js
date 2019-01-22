@@ -14,6 +14,17 @@ export default {
     },
   }),
 
+  loginByToken: token => ({
+    [actions.API_CALL]: {
+      types: [
+        actions.AUTHENTICATION_LOGIN_TOKEN_REQUEST,
+        actions.AUTHENTICATION_LOGIN_TOKEN_SUCCESS,
+        actions.AUTHENTICATION_LOGIN_TOKEN_FAILURE,
+      ],
+      promise: client => client.get(paths.build(paths.AUTHENTCATION_LOGIN_TOKEN, token)),
+    },
+  }),
+
   register: values => ({
     [actions.API_CALL]: {
       types: [

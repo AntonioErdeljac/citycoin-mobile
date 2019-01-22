@@ -1,8 +1,11 @@
 import * as Animatable from 'react-native-animatable';
+import PropTypes from 'prop-types';
 import React from 'react';
-import { View, Text, ScrollView, TouchableOpacity } from 'react-native';
 import { Header, Body, Title, Right, Thumbnail, Left } from 'native-base';
+import { View, Text, ScrollView, TouchableOpacity } from 'react-native';
+import { connect } from 'react-redux';
 
+import selectors from './selectors';
 import styles from './styles';
 import { Service } from './components';
 
@@ -18,7 +21,7 @@ class Dashboard extends React.Component {
   }
 
   render() {
-    const { navigation } = this.props;
+    const { navigation, currentUser } = this.props;
 
     return (
       <Animatable.View animation="fadeInDown" ref={(ref) => { this.mainRef = ref; }} style={styles.container}>
@@ -47,7 +50,7 @@ class Dashboard extends React.Component {
               <View style={styles.walletInner}>
                 <View>
                   <Text style={styles.moneyText}>{_t('labels.money')}</Text>
-                  <Text style={styles.amountText}>$1000</Text>
+                  <Text style={styles.amountText}>${currentUser.wallet.amount}</Text>
                 </View>
                 <TouchableOpacity style={styles.moneyButton}>
                   <Icon.FontAwesome name="plus" color="white" size={15} />
@@ -76,4 +79,12 @@ class Dashboard extends React.Component {
   }
 }
 
-export default Dashboard;
+Dashboard.propTypes = {
+  currentUser: PropTypes.shape({}).isRequired,
+  navigation: PropTypes.shape({}).isRequired,
+};
+
+export default connect(
+  selectors,
+  null,
+)(Dashboard);

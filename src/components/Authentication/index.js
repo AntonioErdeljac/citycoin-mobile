@@ -1,7 +1,7 @@
 import * as Animatable from 'react-native-animatable';
 import PropTypes from 'prop-types';
 import React from 'react';
-import { View, Text, TouchableOpacity, ImageBackground, Image } from 'react-native';
+import { View, Text, TouchableOpacity, ImageBackground, Image, AsyncStorage } from 'react-native';
 import { connect } from 'react-redux';
 import { isEmpty } from 'lodash';
 import { Thumbnail } from 'native-base';
@@ -39,18 +39,21 @@ class Authentication extends React.Component {
 
     if (activeForm === 'login') {
       login(values)
-        .then(() => {
-          this.mainRef.fadeOutUp()
+        .then(({ result }) => {
+          AsyncStorage.setItem('token', result.data.authentication.sessionToken)
             .then(() => {
-              this.setState({
-                isFormVisible: false,
-              }, () => {
-                this.setState({
-                  isWelcomeVisible: true,
-                }, () => {
-                  this.mainRef.fadeInDown();
+              this.mainRef.fadeOutUp()
+                .then(() => {
+                  this.setState({
+                    isFormVisible: false,
+                  }, () => {
+                    this.setState({
+                      isWelcomeVisible: true,
+                    }, () => {
+                      this.mainRef.fadeInDown();
+                    });
+                  });
                 });
-              });
             });
         });
     } else {
