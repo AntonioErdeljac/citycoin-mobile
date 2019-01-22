@@ -18,7 +18,7 @@ export default {
     existingAccount: 'Već imate račun?',
     firstName: 'Ime',
     lastName: 'Prezime',
-    money: 'Novac',
+    amount: 'Iznos',
     newAccount: 'Nemate račun?',
     nin: 'OIB',
     password: 'Lozinka',

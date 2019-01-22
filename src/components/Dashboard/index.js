@@ -1,9 +1,10 @@
 import * as Animatable from 'react-native-animatable';
 import PropTypes from 'prop-types';
 import React from 'react';
+import { ActivityIndicator, View, Text, ScrollView, TouchableOpacity, Dimensions } from 'react-native';
 import { Header, Body, Title, Right, Thumbnail, Left } from 'native-base';
-import { View, Text, ScrollView, TouchableOpacity } from 'react-native';
 import { connect } from 'react-redux';
+import { isEmpty } from 'lodash';
 
 import selectors from './selectors';
 import styles from './styles';
@@ -11,35 +12,38 @@ import { Service } from './components';
 
 import { MenuButton, Icon } from '../common/components';
 
+import actions from '../../actions';
 import { _t } from '../../i18n';
+import { paths } from '../../constants';
 
 class Dashboard extends React.Component {
-  constructor() {
-    super();
+  componentDidMount() {
+    const { getCity } = this.props;
 
-    console.log('dashboard');
+    getCity('5c477ae50c7460335c111659');
   }
 
   render() {
-    const { navigation, currentUser } = this.props;
+    const { navigation, currentUser, city, isLoading, hasFailedToLoad } = this.props;
 
-    return (
-      <Animatable.View animation="fadeInDown" ref={(ref) => { this.mainRef = ref; }} style={styles.container}>
-        <Header transparent>
-          <Left>
-            <MenuButton onPress={() => navigation.openDrawer()} left name="bars" />
-          </Left>
-          <Body style={styles.headerBody}>
-            <Title style={styles.headerText}>Rijeka</Title>
-          </Body>
-          <Right style={styles.pt5}>
-            <Thumbnail
-              style={styles.headerImage}
-              source={{ uri: 'https://avatars2.githubusercontent.com/u/23248726?s=460&v=4' }}
-              small
-            />
-          </Right>
-        </Header>
+    let content = <View style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', flex: 1 }}><ActivityIndicator /></View>;
+
+    let header = <ActivityIndicator />;
+
+    if (!hasFailedToLoad && !isLoading && !isEmpty(city)) {
+      header = <Title style={styles.headerText}>{city.general.name}</Title>;
+    }
+
+    if (!hasFailedToLoad && !isLoading && !isEmpty(city)) {
+      const servicesContent = city.services.map(service => (
+        <Service
+          key={service._id}
+          name={service.general.name}
+          type={service.type}
+        />
+      ));
+
+      content = (
         <ScrollView>
           <View style={styles.itemWrapper}>
             <View style={styles.walletContainer}>
@@ -49,7 +53,7 @@ class Dashboard extends React.Component {
               <Icon.Entypo name="wallet" color="#4E65F6" size={28} />
               <View style={styles.walletInner}>
                 <View>
-                  <Text style={styles.moneyText}>{_t('labels.money')}</Text>
+                  <Text style={styles.moneyText}>{_t('labels.amount')}</Text>
                   <Text style={styles.amountText}>${currentUser.wallet.amount}</Text>
                 </View>
                 <TouchableOpacity style={styles.moneyButton}>
@@ -63,17 +67,31 @@ class Dashboard extends React.Component {
               <Text style={styles.walletTitle}>{_t('labels.services')}</Text>
             </View>
             <ScrollView style={styles.mt10}>
-              <Service
-                name="AutoTrolej"
-                type="bus"
-              />
-              <Service
-                name="CitiBike"
-                type="bike"
-              />
+              {servicesContent}
             </ScrollView>
           </View>
         </ScrollView>
+      );
+    }
+
+    return (
+      <Animatable.View animation="fadeInDown" ref={(ref) => { this.mainRef = ref; }} style={styles.container}>
+        <Header transparent>
+          <Left>
+            <MenuButton onPress={() => navigation.openDrawer()} left name="bars" />
+          </Left>
+          <Body style={styles.headerBody}>
+            {header}
+          </Body>
+          <Right style={styles.pt5}>
+            <Thumbnail
+              style={styles.headerImage}
+              source={{ uri: currentUser.personal.imageUrl || paths.STATIC_USER_PLACEHOLDER }}
+              small
+            />
+          </Right>
+        </Header>
+        {content}
       </Animatable.View>
     );
   }
@@ -81,10 +99,13 @@ class Dashboard extends React.Component {
 
 Dashboard.propTypes = {
   currentUser: PropTypes.shape({}).isRequired,
+  getCity: PropTypes.func.isRequired,
   navigation: PropTypes.shape({}).isRequired,
 };
 
 export default connect(
   selectors,
-  null,
+  {
+    ...actions.city,
+  },
 )(Dashboard);

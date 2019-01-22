@@ -13,6 +13,7 @@ import { Login, Register } from './components';
 import { SubmitButton } from '../common/components';
 
 import actions from '../../actions';
+import { paths } from '../../constants';
 
 import images from '../../../assets/images';
 
@@ -150,7 +151,7 @@ class Authentication extends React.Component {
       ? (
         <React.Fragment>
           <Thumbnail
-            source={{ uri: 'https://avatars2.githubusercontent.com/u/23248726?s=460&v=4' }}
+            source={{ uri: currentUser.personal.imageUrl || paths.STATIC_USER_PLACEHOLDER }}
             large
             style={styles.welcomeContentImage}
           />

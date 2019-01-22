@@ -1,5 +1,5 @@
 export default {
-  bus: {
+  BUS: {
     icon: 'bus',
     type: 'FontAwesome',
   },
