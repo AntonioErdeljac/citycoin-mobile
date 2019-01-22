@@ -15,14 +15,17 @@ export default {
   },
   labels: {
     email: 'Email',
+    existingAccount: 'Već imate račun?',
     firstName: 'Ime',
     lastName: 'Prezime',
+    money: 'Novac',
     newAccount: 'Nemate račun?',
     nin: 'OIB',
     password: 'Lozinka',
+    services: 'Usluge',
     signIn: 'Prijavi se',
     signUp: 'Registriraj se',
-    existingAccount: 'Već imate račun?',
+    wallet: 'Novčanik',
   },
   calendarLocale: {
     monthNames: ['Siječanj', 'Veljača', 'Ožujak', 'Travanj', 'Svibanj', 'Lipanj', 'Srpanj', 'Kolovoz', 'Rujan', 'Listopad', 'Studeni', 'Prosinac'],
