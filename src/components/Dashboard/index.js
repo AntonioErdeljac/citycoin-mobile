@@ -20,7 +20,7 @@ class Dashboard extends React.Component {
   componentDidMount() {
     const { getCity } = this.props;
 
-    getCity('5c477ae50c7460335c111659');
+    getCity('5c47a358c559894fd3afb54f');
   }
 
   render() {

@@ -13,7 +13,7 @@ const Service = ({ name, type }) => {
 
   return (
     <View style={styles.container}>
-      <IconComponent name={type.toLowerCase()} color="#4E65F6" size={28} />
+      <IconComponent name={servicesIcons[type].icon} color="#4E65F6" size={28} />
       <View style={styles.innerContainer}>
         <View>
           <Text style={styles.serviceName}>{name}</Text>

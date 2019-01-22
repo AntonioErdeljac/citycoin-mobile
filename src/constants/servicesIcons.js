@@ -3,35 +3,35 @@ export default {
     icon: 'bus',
     type: 'FontAwesome',
   },
-  bike: {
+  BIKE: {
     icon: 'bike',
     type: 'MaterialCommunityIcons',
   },
-  gym: {
+  GYM: {
     icon: 'run',
     type: 'MaterialCommunityIcons',
   },
-  parking: {
+  PARKING: {
     icon: 'parking',
     type: 'MaterialCommunityIcons',
   },
-  storage: {
+  STORAGE: {
     icon: 'safe',
     type: 'MaterialCommunityIcons',
   },
-  taxi: {
+  TAXI: {
     icon: 'taxi',
     type: 'FontAwesome',
   },
-  apartment: {
+  APARTMENT: {
     icon: 'hotel',
     type: 'FontAwesome',
   },
-  hotel: {
+  HOTEL: {
     icon: 'hotel',
     type: 'FontAwesome',
   },
-  other: {
+  OTHER: {
     icon: 'coin',
     type: 'MaterialCommunityIcons',
   },
