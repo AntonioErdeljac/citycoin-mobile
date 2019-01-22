@@ -4,12 +4,14 @@ import { TouchableOpacity, Text, ActivityIndicator } from 'react-native';
 
 import styles from './styles';
 
+import { _t } from '../../../../i18n';
+
 const SubmitButton = ({ onPress, label, isSubmitting, disabled, style }) => (
   <TouchableOpacity disabled={disabled || isSubmitting} onPress={onPress} style={(disabled || isSubmitting) ? [styles.disabledButton, style || {}] : [styles.button, style || {}]}>
     {
     isSubmitting
       ? <ActivityIndicator color="white" />
-      : <Text style={styles.buttonText}>{label}</Text>
+      : <Text style={styles.buttonText}>{_t(label)}</Text>
   }
   </TouchableOpacity>
 );

@@ -7,6 +7,8 @@ import styles from './styles';
 
 import Icon from '../Icon';
 
+import { _t } from '../../../../i18n';
+
 const Input = ({ touched, errors, setFieldValue, name, placeholder, values, secureTextEntry, disabled, showValidation, hasFailedToSubmit }) => {
   const rightIcon = ((get(touched, name) && showValidation) || hasFailedToSubmit)
     ? <Icon.FontAwesome name={(get(errors, name) || hasFailedToSubmit) ? 'warning' : 'check-circle'} color={(get(errors, name) || hasFailedToSubmit) ? '#e74c3c' : '#1fcf7c'} style={{ marginRight: 16 }} size={18} />
@@ -16,7 +18,7 @@ const Input = ({ touched, errors, setFieldValue, name, placeholder, values, secu
     <Item style={disabled ? styles.innerContainerDisabled : styles.innerContainer}>
       <NativeInput
         disabled={disabled}
-        placeholder={placeholder}
+        placeholder={_t(placeholder)}
         placeholderTextColor="rgba(0,0,0,.6)"
         onChangeText={text => setFieldValue(name, text)}
         value={get(values, name)}

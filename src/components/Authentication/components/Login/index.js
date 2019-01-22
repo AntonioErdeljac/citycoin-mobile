@@ -9,6 +9,8 @@ import styles from '../../styles';
 
 import { SubmitButton, Input } from '../../../common/components';
 
+import { _t } from '../../../../i18n';
+
 const Login = ({ handleOnSubmit, isSubmitting, hasFailedToSubmit, toggleForm }) => (
   <Formik
     initialValues={schema.initialValues}
@@ -20,14 +22,14 @@ const Login = ({ handleOnSubmit, isSubmitting, hasFailedToSubmit, toggleForm }) 
           {...formProps}
           disabled={isSubmitting}
           name="email"
-          placeholder="Email"
+          placeholder="labels.email"
           hasFailedToSubmit={hasFailedToSubmit}
         />
         <Input
           {...formProps}
           name="password"
           disabled={isSubmitting}
-          placeholder="Password"
+          placeholder="labels.password"
           secureTextEntry
           hasFailedToSubmit={hasFailedToSubmit}
         />
@@ -37,11 +39,11 @@ const Login = ({ handleOnSubmit, isSubmitting, hasFailedToSubmit, toggleForm }) 
             <SubmitButton
               onPress={formProps.handleSubmit}
               isSubmitting={isSubmitting}
-              label="Sign in"
+              label="labels.signIn"
             />
           </View>
           <TouchableOpacity onPress={toggleForm}>
-            <Text style={styles.subtitle}>Need an account?</Text>
+            <Text style={styles.subtitle}>{_t('labels.newAccount')}</Text>
           </TouchableOpacity>
         </View>
       </React.Fragment>

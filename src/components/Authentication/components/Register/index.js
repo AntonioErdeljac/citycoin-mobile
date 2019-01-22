@@ -8,6 +8,7 @@ import schema from './schema';
 import styles from '../../styles';
 
 import { SubmitButton, Input } from '../../../common/components';
+import { _t } from '../../../../i18n';
 
 const Register = ({ handleOnSubmit, isSubmitting, hasFailedToSubmit, toggleForm }) => (
   <Formik
@@ -20,28 +21,35 @@ const Register = ({ handleOnSubmit, isSubmitting, hasFailedToSubmit, toggleForm 
           {...formProps}
           disabled={isSubmitting}
           name="personal.firstName"
-          placeholder="First name"
+          placeholder="labels.firstName"
           hasFailedToSubmit={hasFailedToSubmit}
         />
         <Input
           {...formProps}
           disabled={isSubmitting}
           name="personal.lastName"
-          placeholder="Last Name"
+          placeholder="labels.lastName"
+          hasFailedToSubmit={hasFailedToSubmit}
+        />
+        <Input
+          {...formProps}
+          disabled={isSubmitting}
+          name="personal.nin"
+          placeholder="labels.nin"
           hasFailedToSubmit={hasFailedToSubmit}
         />
         <Input
           {...formProps}
           disabled={isSubmitting}
           name="contact.email"
-          placeholder="Email"
+          placeholder="labels.email"
           hasFailedToSubmit={hasFailedToSubmit}
         />
         <Input
           {...formProps}
           name="authentication.password"
           disabled={isSubmitting}
-          placeholder="Password"
+          placeholder="labels.password"
           secureTextEntry
           hasFailedToSubmit={hasFailedToSubmit}
         />
@@ -51,11 +59,11 @@ const Register = ({ handleOnSubmit, isSubmitting, hasFailedToSubmit, toggleForm 
             <SubmitButton
               onPress={formProps.handleSubmit}
               isSubmitting={isSubmitting}
-              label="Sign Up"
+              label="labels.signUp"
             />
           </View>
           <TouchableOpacity onPress={toggleForm}>
-            <Text style={styles.subtitle}>Already have an account?</Text>
+            <Text style={styles.subtitle}>{_t('labels.existingAccount')}</Text>
           </TouchableOpacity>
         </View>
       </React.Fragment>
