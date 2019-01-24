@@ -1,7 +1,7 @@
 export default {
   container: {
     flex: 1,
-    backgroundColor: '#ecf0f1',
+    backgroundColor: '#fff',
   },
 
   loading: {
@@ -43,12 +43,16 @@ export default {
 
   walletContainer: {
     display: 'flex',
-    justifyContent: 'space-between',
+    justifyContent: 'flex-start',
+    alignItems: 'center',
     flexDirection: 'row',
   },
 
-  walletTitle: {
-    color: '#2C2D4C', fontFamily: 'Poppins-Bold', fontSize: 25,
+  serviceTitle: {
+    color: '#2C2D4C',
+    fontFamily: 'Poppins-Bold',
+    fontSize: 25,
+    paddingLeft: 20,
   },
 
   walletBody: {

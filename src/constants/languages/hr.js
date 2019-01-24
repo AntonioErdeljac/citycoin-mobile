@@ -26,6 +26,7 @@ export default {
     signIn: 'Prijavi se',
     signUp: 'Registriraj se',
     wallet: 'Novčanik',
+    subscriptions: 'Pretplate',
   },
   calendarLocale: {
     monthNames: ['Siječanj', 'Veljača', 'Ožujak', 'Travanj', 'Svibanj', 'Lipanj', 'Srpanj', 'Kolovoz', 'Rujan', 'Listopad', 'Studeni', 'Prosinac'],

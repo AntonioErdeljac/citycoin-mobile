@@ -1,6 +1,6 @@
 import { createAppContainer, createDrawerNavigator } from 'react-navigation';
 
-import { Authentication, Dashboard, Drawer, SplashScreen } from '../components';
+import { Authentication, Dashboard, Drawer, SplashScreen, Services } from '../components';
 
 const Router = createDrawerNavigator({
   SplashScreen: {
@@ -11,6 +11,9 @@ const Router = createDrawerNavigator({
   },
   Dashboard: {
     screen: Dashboard,
+  },
+  Services: {
+    screen: Services,
   },
 }, {
   drawerBackgroundColor: '#fff',

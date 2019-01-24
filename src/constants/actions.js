@@ -16,4 +16,7 @@ export default keyMirror({
   CITY_GET_FAILURE: null,
   CITY_GET_REQUEST: null,
   CITY_GET_SUCCESS: null,
+  SERVICE_GET_FAILURE: null,
+  SERVICE_GET_REQUEST: null,
+  SERVICE_GET_SUCCESS: null,
 });

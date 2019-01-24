@@ -1,7 +1,7 @@
 import * as Animatable from 'react-native-animatable';
 import PropTypes from 'prop-types';
 import React from 'react';
-import { ActivityIndicator, View, Text, ScrollView, TouchableOpacity, Dimensions } from 'react-native';
+import { ActivityIndicator, View, Text, ScrollView, TouchableOpacity } from 'react-native';
 import { Header, Body, Title, Right, Thumbnail, Left } from 'native-base';
 import { connect } from 'react-redux';
 import { isEmpty } from 'lodash';
@@ -20,13 +20,13 @@ class Dashboard extends React.Component {
   componentDidMount() {
     const { getCity } = this.props;
 
-    getCity('5c47a358c559894fd3afb54f');
+    getCity('5c49e4ce40007c1dd204e5f9');
   }
 
   render() {
     const { navigation, currentUser, city, isLoading, hasFailedToLoad } = this.props;
 
-    let content = <View style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', flex: 1 }}><ActivityIndicator /></View>;
+    let content = <View style={styles.loading}><ActivityIndicator /></View>;
 
     let header = <ActivityIndicator />;
 
@@ -37,9 +37,9 @@ class Dashboard extends React.Component {
     if (!hasFailedToLoad && !isLoading && !isEmpty(city)) {
       const servicesContent = city.services.map(service => (
         <Service
+          navigation={navigation}
           key={service._id}
-          name={service.general.name}
-          type={service.type}
+          service={service}
         />
       ));
 
@@ -98,8 +98,11 @@ class Dashboard extends React.Component {
 }
 
 Dashboard.propTypes = {
+  city: PropTypes.shape({}).isRequired,
   currentUser: PropTypes.shape({}).isRequired,
   getCity: PropTypes.func.isRequired,
+  hasFailedToLoad: PropTypes.bool.isRequired,
+  isLoading: PropTypes.bool.isRequired,
   navigation: PropTypes.shape({}).isRequired,
 };
 

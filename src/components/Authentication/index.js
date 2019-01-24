@@ -20,6 +20,7 @@ import images from '../../../assets/images';
 class Authentication extends React.Component {
   static navigationOptions = {
     header: () => null,
+    drawerLabel: () => null,
   }
 
   constructor() {
