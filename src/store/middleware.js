@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { AsyncStorage } from 'react-native';
 
 import config from '../config';
 import { actions } from '../constants';
@@ -40,22 +41,23 @@ export default () => ({ dispatch, getState }) => next => (action) => {
     source,
   });
 
-  return promise(axios.create({ baseURL: config.server.uri, cancelToken: source.token }), dispatch)
-    .then(
-      (result) => {
-        activeRequests = getStillActiveRequests();
+  return AsyncStorage.getItem('token')
+    .then(token => promise(axios.create({ baseURL: config.server.uri, cancelToken: source.token, headers: { Authorization: token } }), dispatch)
+      .then(
+        (result) => {
+          activeRequests = getStillActiveRequests();
 
-        return next({ ...rest, result, type: SUCCESS });
-      },
-      (error) => {
-        if (error.message === CANCEL_MESSAGE) {
-          return Promise.resolve(error);
-        }
+          return next({ ...rest, result, type: SUCCESS });
+        },
+        (error) => {
+          if (error.message === CANCEL_MESSAGE) {
+            return Promise.resolve(error);
+          }
 
-        activeRequests = getStillActiveRequests();
+          activeRequests = getStillActiveRequests();
 
-        next({ ...rest, error, type: FAILURE });
-        return Promise.reject(error);
-      },
-    );
+          next({ ...rest, error, type: FAILURE });
+          return Promise.reject(error);
+        },
+      ));
 };

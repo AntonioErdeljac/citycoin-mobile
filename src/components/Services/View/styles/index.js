@@ -19,6 +19,34 @@ export default {
     paddingTop: 5,
   },
 
+  formTotal: {
+    display: 'flex',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    flexDirection: 'row',
+    borderTopColor: 'rgba(0,0,0,.4)',
+    borderTopWidth: 0.35,
+    paddingTop: 25,
+    padding: 5,
+  },
+
+  formItem: {
+    borderRadius: 5,
+    backgroundColor: 'white',
+    display: 'flex',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    flexDirection: 'row',
+    padding: 5,
+    marginBottom: 25,
+  },
+
+  formContainer: {
+    padding: 15,
+    borderRadius: 5,
+    backgroundColor: 'white',
+  },
+
   footerButton: {
     alignSelf: 'center',
     position: 'absolute',
@@ -90,6 +118,20 @@ export default {
     paddingLeft: 20,
   },
 
+  formItemTitle: {
+    fontFamily: 'Poppins-Medium',
+    color: '#2C2D4C',
+    fontSize: 18,
+    alignSelf: 'center',
+  },
+
+  formItemPrice: {
+    color: '#2C2D4C',
+    fontFamily: 'Poppins-Bold',
+    fontSize: 25,
+    alignSelf: 'center',
+  },
+
   walletBody: {
     marginTop: 10,
     backgroundColor: 'white',
@@ -117,6 +159,13 @@ export default {
     paddingTop: 5,
     fontSize: 15,
     paddingLeft: 20,
+  },
+
+  formItemSubtitle: {
+    fontFamily: 'Poppins-Medium',
+    color: 'rgba(0,0,0,.5)',
+    paddingTop: 5,
+    fontSize: 15,
   },
 
   moneyButton: {

@@ -4,7 +4,7 @@ import React from 'react';
 import { Left, Header } from 'native-base';
 import { ScrollView, View, Text, ActivityIndicator, TouchableOpacity } from 'react-native';
 import { connect } from 'react-redux';
-import { isEmpty } from 'lodash';
+import { isEmpty, find } from 'lodash';
 
 import selectors from './selectors';
 import styles from './styles';
@@ -20,6 +20,7 @@ class ServicesView extends React.Component {
 
     this.state = {
       selectedSubscriptions: [],
+      showCheckoutForm: false,
     };
   }
 
@@ -29,21 +30,29 @@ class ServicesView extends React.Component {
     getService(navigation.state.params.id);
   }
 
-  toggleSubscription = (id) => {
+  toggleSubscription = (subscription) => {
     const { selectedSubscriptions } = this.state;
 
-    const newSelectedSubscriptions = selectedSubscriptions.indexOf(id) === -1
-      ? [id, ...selectedSubscriptions]
-      : selectedSubscriptions.filter(subscriptionId => subscriptionId !== id);
+    const existingSelectedSubscription = find(selectedSubscriptions, { _id: subscription._id });
+
+    const newSelectedSubscriptions = existingSelectedSubscription
+      ? selectedSubscriptions.filter(foundSubscription => foundSubscription._id !== subscription._id)
+      : selectedSubscriptions.concat(subscription);
 
     this.setState({
       selectedSubscriptions: newSelectedSubscriptions,
     });
   }
 
+  handleConfirm = () => {
+    this.setState({
+      showCheckoutForm: true,
+    });
+  }
+
   render() {
     const { service, isLoading, hasFailedToLoad } = this.props;
-    const { selectedSubscriptions } = this.state;
+    const { selectedSubscriptions, showCheckoutForm } = this.state;
 
     let content = <View style={styles.loading}><ActivityIndicator /></View>;
 
@@ -51,6 +60,30 @@ class ServicesView extends React.Component {
       const subscriptionsContent = service.subscriptions.map(subscription => (
         <Subscription toggleSubscription={this.toggleSubscription} selectedSubscriptions={selectedSubscriptions} subscription={subscription} key={subscription._id} />
       ));
+
+      const checkoutForm = (
+        <View style={styles.formContainer}>
+          {selectedSubscriptions.map(subscription => (
+            <View key={subscription._id} style={styles.formItem}>
+              <View>
+                <Text style={styles.formItemTitle}>{subscription.description}</Text>
+                <Text style={styles.formItemSubtitle}>{subscription.duration} {subscription.duration === 1 ? _t(`durationUnits.${subscription.durationUnit.slice(0, -1)}`) : _t(`durationUnits.${subscription.durationUnit}`)}</Text>
+              </View>
+              <View>
+                <Text style={styles.formItemPrice}>${subscription.price}</Text>
+              </View>
+            </View>
+          ))}
+          <View style={styles.formTotal}>
+            <Text style={styles.formItemTitle}>{_t('labels.total')}</Text>
+            <Text style={styles.formItemPrice}>${selectedSubscriptions.length > 1 ? selectedSubscriptions.reduce((current, next) => current.price + next.price) : (selectedSubscriptions.length > 0 && selectedSubscriptions[0].price)}</Text>
+          </View>
+        </View>
+      );
+
+      const innerContent = showCheckoutForm
+        ? checkoutForm
+        : subscriptionsContent;
 
       content = (
         <View style={styles.itemWrapper}>
@@ -62,7 +95,7 @@ class ServicesView extends React.Component {
             </View>
           </View>
           <View style={styles.mt30}>
-            {subscriptionsContent}
+            {innerContent}
           </View>
         </View>
       );
@@ -78,8 +111,8 @@ class ServicesView extends React.Component {
         <ScrollView>
           {content}
         </ScrollView>
-        <TouchableOpacity style={selectedSubscriptions.length > 0 ? styles.footerButton : styles.footerButtonDisabled} disabled={selectedSubscriptions.length === 0}>
-          <Text style={styles.footerButtonText}>{_t('labels.confirm')}</Text>
+        <TouchableOpacity onPress={this.handleConfirm} style={selectedSubscriptions.length > 0 ? styles.footerButton : styles.footerButtonDisabled} disabled={selectedSubscriptions.length === 0}>
+          <Text style={styles.footerButtonText}>{showCheckoutForm ? _t('labels.purchase') : _t('labels.confirm')}</Text>
         </TouchableOpacity>
       </Animatable.View>
     );
