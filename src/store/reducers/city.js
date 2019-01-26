@@ -7,6 +7,8 @@ const initialState = {
 };
 
 const actionMap = {
+  [actions.CITY_DATA_RESET]: () => ({ ...initialState }),
+
   [actions.CITY_GET_REQUEST]: state => ({
     ...state,
     isLoading: true,

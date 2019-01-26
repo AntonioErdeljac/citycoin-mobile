@@ -11,6 +11,7 @@ export default {
   AUTHENTICATION_REGISTER: '/api/v1/authentication/registration',
   CITIES_ID: '/api/v1/cities/:id',
   SERVICES_ID: '/api/v1/services/:id',
+  SERVICES_ID_SUBSCRIPTIONS_ID: '/api/v1/services/:id/subscrptions/:subscriptionId',
 
   STATIC_USER_PLACEHOLDER: `${config.server.uri}/static/user-placeholder.png`,
 };

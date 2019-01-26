@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import { ActivityIndicator, View, Text, ScrollView, TouchableOpacity } from 'react-native';
 import { Header, Body, Title, Right, Thumbnail, Left } from 'native-base';
+import { NavigationEvents } from 'react-navigation';
 import { connect } from 'react-redux';
 import { isEmpty } from 'lodash';
 
@@ -17,10 +18,34 @@ import { _t } from '../../i18n';
 import { paths } from '../../constants';
 
 class Dashboard extends React.Component {
+  constructor() {
+    super();
+
+    this.mainRef = React.createRef();
+  }
+
   componentDidMount() {
     const { getCity } = this.props;
 
-    getCity('5c49e4ce40007c1dd204e5f9');
+    getCity('5c4b09a2d81016075fd27cb5');
+  }
+
+  loadView = () => {
+    const { getCity } = this.props;
+
+    this.mainRef.fadeInDown()
+      .then(() => {
+        getCity('5c4b09a2d81016075fd27cb5');
+      });
+  }
+
+  purgeView = () => {
+    const { clearCityState } = this.props;
+
+    this.mainRef.fadeInUp()
+      .then(() => {
+        clearCityState();
+      });
   }
 
   render() {
@@ -76,6 +101,10 @@ class Dashboard extends React.Component {
 
     return (
       <Animatable.View animation="fadeInDown" ref={(ref) => { this.mainRef = ref; }} style={styles.container}>
+        <NavigationEvents
+          onWillFocus={this.loadView}
+          onWillBlur={this.purgeView}
+        />
         <Header transparent>
           <Left>
             <MenuButton onPress={() => navigation.openDrawer()} left name="bars" />
@@ -99,6 +128,7 @@ class Dashboard extends React.Component {
 
 Dashboard.propTypes = {
   city: PropTypes.shape({}).isRequired,
+  clearCityState: PropTypes.func.isRequired,
   currentUser: PropTypes.shape({}).isRequired,
   getCity: PropTypes.func.isRequired,
   hasFailedToLoad: PropTypes.bool.isRequired,

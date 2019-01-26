@@ -2,6 +2,7 @@ import * as Animatable from 'react-native-animatable';
 import PropTypes from 'prop-types';
 import React from 'react';
 import { Left, Header } from 'native-base';
+import { NavigationEvents } from 'react-navigation';
 import { ScrollView, View, Text, ActivityIndicator, TouchableOpacity } from 'react-native';
 import { connect } from 'react-redux';
 import { isEmpty, find } from 'lodash';
@@ -21,13 +22,39 @@ class ServicesView extends React.Component {
     this.state = {
       selectedSubscriptions: [],
       showCheckoutForm: false,
+      isBuying: false,
     };
+
+    this.mainRef = React.createRef();
   }
 
   componentDidMount() {
     const { navigation, getService } = this.props;
 
     getService(navigation.state.params.id);
+  }
+
+  loadView = () => {
+    const { navigation, getService } = this.props;
+
+    this.mainRef.fadeInDown()
+      .then(() => {
+        getService(navigation.state.params.id);
+      });
+  }
+
+  purgeView = () => {
+    const { navigation, clearServiceData } = this.props;
+
+    this.mainRef.fadeOutUp()
+      .then(() => {
+        this.setState({
+          selectedSubscriptions: [],
+          showCheckoutForm: false,
+          isBuying: false,
+        });
+        clearServiceData(navigation.state.params.id);
+      });
   }
 
   toggleSubscription = (subscription) => {
@@ -50,9 +77,32 @@ class ServicesView extends React.Component {
     });
   }
 
+  handleBuy = () => {
+    const { subscribe, service, navigation } = this.props;
+    const { selectedSubscriptions } = this.state;
+
+    this.setState({
+      isBuying: true,
+    }, () => {
+      Promise.all(selectedSubscriptions.map(subscription => subscribe(service._id, subscription._id)))
+        .then(() => {
+          this.setState({
+            isBuying: false,
+          }, () => {
+            navigation.navigate('Dashboard');
+          });
+        })
+        .catch(() => {
+          this.setState({
+            isBuying: false,
+          });
+        });
+    });
+  }
+
   render() {
     const { service, isLoading, hasFailedToLoad } = this.props;
-    const { selectedSubscriptions, showCheckoutForm } = this.state;
+    const { selectedSubscriptions, showCheckoutForm, isBuying } = this.state;
 
     let content = <View style={styles.loading}><ActivityIndicator /></View>;
 
@@ -103,6 +153,10 @@ class ServicesView extends React.Component {
 
     return (
       <Animatable.View animation="fadeInDown" ref={(ref) => { this.mainRef = ref; }} style={styles.container}>
+        <NavigationEvents
+          onWillFocus={this.loadView}
+          onWillBlur={this.purgeView}
+        />
         <Header transparent hasTabs>
           <Left>
             <Icon.MaterialCommunityIcons name="arrow-left" size={25} color="black" />
@@ -111,8 +165,11 @@ class ServicesView extends React.Component {
         <ScrollView>
           {content}
         </ScrollView>
-        <TouchableOpacity onPress={this.handleConfirm} style={selectedSubscriptions.length > 0 ? styles.footerButton : styles.footerButtonDisabled} disabled={selectedSubscriptions.length === 0}>
-          <Text style={styles.footerButtonText}>{showCheckoutForm ? _t('labels.purchase') : _t('labels.confirm')}</Text>
+        <TouchableOpacity onPress={showCheckoutForm ? this.handleBuy : this.handleConfirm} style={selectedSubscriptions.length > 0 ? styles.footerButton : styles.footerButtonDisabled} disabled={selectedSubscriptions.length === 0}>
+          {isBuying
+            ? <ActivityIndicator />
+            : <Text style={styles.footerButtonText}>{showCheckoutForm ? _t('labels.purchase') : _t('labels.confirm')}</Text>
+        }
         </TouchableOpacity>
       </Animatable.View>
     );
@@ -120,11 +177,13 @@ class ServicesView extends React.Component {
 }
 
 ServicesView.propTypes = {
+  clearServiceData: PropTypes.func.isRequired,
   getService: PropTypes.func.isRequired,
   hasFailedToLoad: PropTypes.bool.isRequired,
   isLoading: PropTypes.bool.isRequired,
   navigation: PropTypes.shape({}).isRequired,
   service: PropTypes.shape({}).isRequired,
+  subscribe: PropTypes.func.isRequired,
 };
 
 export default connect(

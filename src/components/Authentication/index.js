@@ -35,6 +35,10 @@ class Authentication extends React.Component {
     this.mainRef = React.createRef();
   }
 
+  componentWillMount() {
+    this.purgeForm();
+  }
+
   handleSubmit = (values) => {
     const { login, register } = this.props;
     const { activeForm } = this.state;
@@ -124,6 +128,18 @@ class Authentication extends React.Component {
       .then(() => {
         navigation.navigate('Dashboard');
       });
+  }
+
+  purgeForm = () => {
+    const { clearAuthenticationState } = this.props;
+
+    clearAuthenticationState();
+
+    this.setState({
+      isWelcomeVisible: false,
+      isFormVisible: true,
+      activeForm: 'login',
+    });
   }
 
   render() {

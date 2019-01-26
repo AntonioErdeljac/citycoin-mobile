@@ -1,6 +1,8 @@
 import { actions, paths } from '../constants';
 
 export default {
+  clearCityState: () => ({ type: actions.CITY_DATA_RESET }),
+
   getCity: id => ({
     [actions.API_CALL]: {
       types: [
