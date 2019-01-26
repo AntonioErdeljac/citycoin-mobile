@@ -33,9 +33,9 @@ class Dashboard extends React.Component {
   loadView = () => {
     const { getCity } = this.props;
 
-    this.mainRef.fadeInDown()
+    getCity('5c4b09a2d81016075fd27cb5')
       .then(() => {
-        getCity('5c4b09a2d81016075fd27cb5');
+        this.mainRef.fadeInDown();
       });
   }
 

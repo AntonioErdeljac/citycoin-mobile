@@ -37,9 +37,9 @@ class ServicesView extends React.Component {
   loadView = () => {
     const { navigation, getService } = this.props;
 
-    this.mainRef.fadeInDown()
+    getService(navigation.state.params.id)
       .then(() => {
-        getService(navigation.state.params.id);
+        this.mainRef.fadeInDown();
       });
   }
 
@@ -152,7 +152,7 @@ class ServicesView extends React.Component {
     }
 
     return (
-      <Animatable.View animation="fadeInDown" ref={(ref) => { this.mainRef = ref; }} style={styles.container}>
+      <Animatable.View ref={(ref) => { this.mainRef = ref; }} style={styles.container}>
         <NavigationEvents
           onWillFocus={this.loadView}
           onWillBlur={this.purgeView}
