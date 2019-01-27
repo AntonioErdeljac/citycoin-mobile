@@ -11,7 +11,7 @@ import selectors from './selectors';
 import styles from './styles';
 import { Subscription } from './components';
 
-import { Icon, ServiceIcon } from '../../common/components';
+import { ServiceIcon, BackButton } from '../../common/components';
 import actions from '../../../actions';
 import { _t } from '../../../i18n';
 
@@ -101,7 +101,7 @@ class ServicesView extends React.Component {
   }
 
   render() {
-    const { service, isLoading, hasFailedToLoad } = this.props;
+    const { service, isLoading, hasFailedToLoad, navigation } = this.props;
     const { selectedSubscriptions, showCheckoutForm, isBuying } = this.state;
 
     let content = <View style={styles.loading}><ActivityIndicator /></View>;
@@ -157,9 +157,9 @@ class ServicesView extends React.Component {
           onWillFocus={this.loadView}
           onWillBlur={this.purgeView}
         />
-        <Header transparent hasTabs>
+        <Header transparent>
           <Left>
-            <Icon.MaterialCommunityIcons name="arrow-left" size={25} color="black" />
+            <BackButton navigation={navigation} />
           </Left>
         </Header>
         <ScrollView>
