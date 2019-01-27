@@ -18,9 +18,14 @@ const Subscription = ({ subscription, toggleSubscription, selectedSubscriptions 
         <Text style={styles.servicePrice}>${subscription.price}</Text>
         <Text style={styles.servicePrice}>{subscription.duration} {subscription.duration === 1 ? _t(`durationUnits.${subscription.durationUnit.slice(0, -1)}`) : _t(`durationUnits.${subscription.durationUnit}`)}</Text>
       </View>
-      <View style={find(selectedSubscriptions, { _id: subscription._id }) ? styles.buttonSelected : styles.button}>
-        <Icon.FontAwesome name="check" color="white" size={15} />
-      </View>
+      {find(selectedSubscriptions, { _id: subscription._id })
+        ? (
+          <View style={styles.buttonSelected}>
+            <Icon.FontAwesome name="check" color="white" size={15} />
+          </View>
+        )
+        : null
+      }
     </View>
   </TouchableOpacity>
 );

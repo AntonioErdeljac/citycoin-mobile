@@ -11,17 +11,17 @@ import React from 'react';
 import SimpleLineIconsIcon from 'react-native-vector-icons/SimpleLineIcons';
 import ZocialIcon from 'react-native-vector-icons/Zocial';
 
-const MaterialCommunityIcons = props => <MaterialCommunityIconsIcon {...props} />;
-const SimpleLineIcons = props => <SimpleLineIconsIcon {...props} />;
-const MaterialIcons = props => <MaterialIconsIcon {...props} />;
-const FontAwesome = props => <FontAwesomeIcon {...props} />;
-const Foundation = props => <FoundationIcon {...props} />;
-const EvilIcons = props => <EvilIconsIcon {...props} />;
-const Ionicons = props => <IoniconsIcon {...props} />;
-const Octicons = props => <OcticonsIcon {...props} />;
-const Feather = props => <FeatherIcon {...props} />;
-const Entypo = props => <EntypoIcon {...props} />;
-const Zocial = props => <ZocialIcon {...props} />;
+const MaterialCommunityIcons = ({ tintColor, ...rest }) => <MaterialCommunityIconsIcon {...rest} color={rest.color || tintColor} />;
+const SimpleLineIcons = ({ tintColor, ...rest }) => <SimpleLineIconsIcon {...rest} color={rest.color || tintColor} />;
+const MaterialIcons = ({ tintColor, ...rest }) => <MaterialIconsIcon {...rest} color={rest.color || tintColor} />;
+const FontAwesome = ({ tintColor, ...rest }) => <FontAwesomeIcon {...rest} color={rest.color || tintColor} />;
+const Foundation = ({ tintColor, ...rest }) => <FoundationIcon {...rest} color={rest.color || tintColor} />;
+const EvilIcons = ({ tintColor, ...rest }) => <EvilIconsIcon {...rest} color={rest.color || tintColor} />;
+const Ionicons = ({ tintColor, ...rest }) => <IoniconsIcon {...rest} color={rest.color || tintColor} />;
+const Octicons = ({ tintColor, ...rest }) => <OcticonsIcon {...rest} color={rest.color || tintColor} />;
+const Feather = ({ tintColor, ...rest }) => <FeatherIcon {...rest} color={rest.color || tintColor} />;
+const Entypo = ({ tintColor, ...rest }) => <EntypoIcon {...rest} color={rest.color || tintColor} />;
+const Zocial = ({ tintColor, ...rest }) => <ZocialIcon {...rest} color={rest.color || tintColor} />;
 
 export default {
   MaterialCommunityIcons,

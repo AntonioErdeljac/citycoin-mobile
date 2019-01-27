@@ -18,6 +18,11 @@ import { _t } from '../../i18n';
 import { paths } from '../../constants';
 
 class Dashboard extends React.Component {
+  static navigationOptions = () => ({
+    drawerLabel: _t('navigation.home'),
+    drawerIcon: props => <Icon.FontAwesome name="home" size={25} {...props} />,
+  })
+
   constructor() {
     super();
 

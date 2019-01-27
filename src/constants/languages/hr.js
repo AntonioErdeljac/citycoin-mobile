@@ -1,17 +1,7 @@
 export default {
   navigation: {
-    calendars: 'Kalendari',
-    clubs: 'Klubovi',
-    contact: 'Kontakt',
-    contests: 'Natjecanja',
-    documents: 'Dokumenti',
-    entities: 'Tijela saveza',
-    gallery: 'Galerija',
     home: 'Početna',
-    news: 'Novosti',
-    practices: 'Pripreme',
-    results: 'Rezultati',
-    webClipping: 'Isječci',
+    subscriptions: 'Pretplate',
   },
   labels: {
     amount: 'Iznos',

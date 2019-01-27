@@ -24,4 +24,8 @@ export default keyMirror({
   SERVICE_SUBSCRIBE_FAILURE: null,
   SERVICE_SUBSCRIBE_REQUEST: null,
   SERVICE_SUBSCRIBE_SUCCESS: null,
+  USER_DATA_RESET: null,
+  USER_GET_FAILURE: null,
+  USER_GET_REQUEST: null,
+  USER_GET_SUCCESS: null,
 });

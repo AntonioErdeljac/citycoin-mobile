@@ -12,6 +12,7 @@ export default {
   CITIES_ID: '/api/v1/cities/:id',
   SERVICES_ID: '/api/v1/services/:id',
   SERVICES_ID_SUBSCRIPTIONS_ID: '/api/v1/services/:id/subscrptions/:subscriptionId',
+  USERS_ID: '/api/v1/users/:id',
 
   STATIC_USER_PLACEHOLDER: `${config.server.uri}/static/user-placeholder.png`,
 };

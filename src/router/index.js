@@ -1,6 +1,6 @@
 import { createAppContainer, createDrawerNavigator } from 'react-navigation';
 
-import { Authentication, Dashboard, Drawer, SplashScreen, Services } from '../components';
+import { Authentication, Dashboard, Drawer, SplashScreen, Services, Subscriptions } from '../components';
 
 const Router = createDrawerNavigator({
   SplashScreen: {
@@ -15,15 +15,19 @@ const Router = createDrawerNavigator({
   Services: {
     screen: Services,
   },
+  Subscriptions: {
+    screen: Subscriptions,
+  },
 }, {
   drawerBackgroundColor: '#fff',
   contentOptions: {
-    inactiveTintColor: 'rgba(0,0,0,.8)',
-    activeTintColor: '#f03434',
+    inactiveTintColor: 'rgba(0,0,0,.6)',
+    activeTintColor: '#4E65F6',
     activeBackgroundColor: 'rgba(0,0,0,.05)',
     labelStyle: {
-      fontFamily: 'Poppins-Light',
-      fontWeight: 'normal',
+      fontFamily: 'Poppins-Medium',
+      fontWeight: 'bold',
+      fontSize: 20,
     },
   },
   contentComponent: Drawer,
