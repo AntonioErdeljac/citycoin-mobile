@@ -1,7 +1,8 @@
+import * as Animatable from 'react-native-animatable';
 import PropTypes from 'prop-types';
 import React from 'react';
+import { NavigationEvents } from 'react-navigation';
 import { View, ScrollView, ActivityIndicator, Text } from 'react-native';
-import { Header, Left } from 'native-base';
 import { connect } from 'react-redux';
 import { isEmpty } from 'lodash';
 
@@ -9,16 +10,35 @@ import selectors from './selectors';
 import styles from './styles';
 import { Subscription } from './components';
 
-import { BackButton, Icon } from '../../common/components';
+import { Icon } from '../../common/components';
 
 import actions from '../../../actions';
 import { _t } from '../../../i18n';
 
 class SubscriptionsList extends React.Component {
+  constructor() {
+    super();
+
+    this.mainRef = React.createRef();
+  }
+
   componentDidMount() {
     const { getUser, currentUser } = this.props;
 
     getUser(currentUser._id);
+  }
+
+  loadList = () => {
+    const { getUser, currentUser } = this.props;
+
+    getUser(currentUser._id)
+      .then(() => {
+        this.mainRef.fadeInDown();
+      });
+  }
+
+  purgeList = () => {
+    this.mainRef.fadeOutUp();
   }
 
   render() {
@@ -37,7 +57,7 @@ class SubscriptionsList extends React.Component {
           </View>
           <View style={styles.mt30}>
             {user.subscribedServices.map(subscribedService => (
-              <Subscription key={subscribedService._id} service={subscribedService.serviceId} subscription={subscribedService.subscriptionId} />
+              <Subscription navigation={navigation} key={subscribedService._id} service={subscribedService.serviceId} subscription={subscribedService.subscriptionId} />
             ))}
           </View>
         </View>
@@ -46,14 +66,15 @@ class SubscriptionsList extends React.Component {
 
     return (
       <View style={styles.container}>
-        <Header transparent>
-          <Left>
-            <BackButton navigation={navigation} />
-          </Left>
-        </Header>
-        <ScrollView>
-          {content}
-        </ScrollView>
+        <NavigationEvents
+          onWillFocus={this.loadList}
+          onWillBlur={this.purgeList}
+        />
+        <Animatable.View ref={(ref) => { this.mainRef = ref; }}>
+          <ScrollView>
+            {content}
+          </ScrollView>
+        </Animatable.View>
       </View>
     );
   }

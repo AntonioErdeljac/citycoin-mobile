@@ -1,7 +1,10 @@
 export default {
   container: {
     flex: 1,
-    backgroundColor: '#ecf0f1',
+    backgroundColor: '#4E65F6',
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
   },
 
   loading: {
@@ -84,7 +87,7 @@ export default {
   },
 
   itemWrapper: {
-    marginTop: 50,
+    marginTop: 20,
     padding: 15,
   },
 

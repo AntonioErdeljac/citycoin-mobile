@@ -43,12 +43,16 @@ export default {
 
   walletContainer: {
     display: 'flex',
-    justifyContent: 'space-between',
+    justifyContent: 'flex-start',
+    alignItems: 'center',
     flexDirection: 'row',
   },
 
   walletTitle: {
-    color: '#2C2D4C', fontFamily: 'Poppins-Bold', fontSize: 25,
+    paddingLeft: 20,
+    color: '#2C2D4C',
+    fontFamily: 'Poppins-Bold',
+    fontSize: 25,
   },
 
   walletBody: {

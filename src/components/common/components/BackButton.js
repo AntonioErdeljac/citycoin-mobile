@@ -4,14 +4,14 @@ import { TouchableOpacity } from 'react-native';
 
 import Icon from './Icon';
 
-const BackButton = ({ navigation }) => (
-  <TouchableOpacity onPress={() => navigation.navigate('Dashboard')}>
+const BackButton = ({ onPress }) => (
+  <TouchableOpacity onPress={onPress}>
     <Icon.MaterialCommunityIcons name="arrow-left" size={25} color="black" />
   </TouchableOpacity>
 );
 
 BackButton.propTypes = {
-  navigation: PropTypes.shape({}).isRequired,
+  onPress: PropTypes.func.isRequired,
 };
 
 export default BackButton;

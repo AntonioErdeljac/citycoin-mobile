@@ -26,7 +26,7 @@ class SplashScreen extends React.Component {
         if (token) {
           loginByToken(token)
             .then(() => {
-              navigation.navigate('Dashboard');
+              navigation.navigate('TabRouter');
             })
             .catch(() => {
               AsyncStorage.clear()

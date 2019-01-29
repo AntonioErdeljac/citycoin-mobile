@@ -44,6 +44,20 @@ class ServicesView extends React.Component {
   }
 
   purgeView = () => {
+    const { clearServiceData } = this.props;
+
+    this.mainRef.fadeOutUp()
+      .then(() => {
+        this.setState({
+          selectedSubscriptions: [],
+          showCheckoutForm: false,
+          isBuying: false,
+        });
+        clearServiceData();
+      });
+  }
+
+  purgeNavigate = () => {
     const { navigation, clearServiceData } = this.props;
 
     this.mainRef.fadeOutUp()
@@ -53,7 +67,8 @@ class ServicesView extends React.Component {
           showCheckoutForm: false,
           isBuying: false,
         });
-        clearServiceData(navigation.state.params.id);
+        clearServiceData();
+        navigation.navigate('Dashboard');
       });
   }
 
@@ -101,7 +116,7 @@ class ServicesView extends React.Component {
   }
 
   render() {
-    const { service, isLoading, hasFailedToLoad, navigation } = this.props;
+    const { service, isLoading, hasFailedToLoad } = this.props;
     const { selectedSubscriptions, showCheckoutForm, isBuying } = this.state;
 
     let content = <View style={styles.loading}><ActivityIndicator /></View>;
@@ -152,26 +167,27 @@ class ServicesView extends React.Component {
     }
 
     return (
-      <Animatable.View ref={(ref) => { this.mainRef = ref; }} style={styles.container}>
+      <View style={styles.container}>
         <NavigationEvents
           onWillFocus={this.loadView}
-          onWillBlur={this.purgeView}
         />
-        <Header transparent>
-          <Left>
-            <BackButton navigation={navigation} />
-          </Left>
-        </Header>
-        <ScrollView>
-          {content}
-        </ScrollView>
+        <Animatable.View ref={(ref) => { this.mainRef = ref; }}>
+          <Header transparent>
+            <Left>
+              <BackButton onPress={this.purgeNavigate} />
+            </Left>
+          </Header>
+          <ScrollView>
+            {content}
+          </ScrollView>
+        </Animatable.View>
         <TouchableOpacity onPress={showCheckoutForm ? this.handleBuy : this.handleConfirm} style={selectedSubscriptions.length > 0 ? styles.footerButton : styles.footerButtonDisabled} disabled={selectedSubscriptions.length === 0}>
           {isBuying
             ? <ActivityIndicator />
             : <Text style={styles.footerButtonText}>{showCheckoutForm ? _t('labels.purchase') : _t('labels.confirm')}</Text>
-        }
+            }
         </TouchableOpacity>
-      </Animatable.View>
+      </View>
     );
   }
 }

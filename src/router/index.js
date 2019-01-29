@@ -1,36 +1,71 @@
-import { createAppContainer, createDrawerNavigator } from 'react-navigation';
+import React from 'react';
+import { createAppContainer, createBottomTabNavigator, createStackNavigator } from 'react-navigation';
 
-import { Authentication, Dashboard, Drawer, SplashScreen, Services, Subscriptions } from '../components';
+import { Authentication, Dashboard, SplashScreen, Services, Subscriptions, Wallet } from '../components';
+import { Icon } from '../components/common/components';
 
-const Router = createDrawerNavigator({
-  SplashScreen: {
-    screen: SplashScreen,
-  },
-  Authentication: {
-    screen: Authentication,
-  },
+const TabRouter = createBottomTabNavigator({
   Dashboard: {
     screen: Dashboard,
   },
-  Services: {
-    screen: Services,
+  Wallet: {
+    screen: Wallet,
   },
   Subscriptions: {
     screen: Subscriptions,
   },
-}, {
-  drawerBackgroundColor: '#fff',
-  contentOptions: {
-    inactiveTintColor: 'rgba(0,0,0,.6)',
-    activeTintColor: '#4E65F6',
-    activeBackgroundColor: 'rgba(0,0,0,.05)',
-    labelStyle: {
-      fontFamily: 'Poppins-Medium',
-      fontWeight: 'bold',
-      fontSize: 20,
+},
+{
+  defaultNavigationOptions: ({ navigation }) => ({
+    tabBarIcon: ({ tintColor }) => {
+      const { routeName } = navigation.state;
+      if (routeName === 'Dashboard') {
+        return <Icon.FontAwesome name="home" size={25} color={tintColor} />;
+      }
+
+      if (routeName === 'Subscriptions') {
+        return <Icon.FontAwesome name="ticket" size={25} color={tintColor} />;
+      }
+
+      if (routeName === 'Wallet') {
+        return <Icon.Entypo name="wallet" size={25} color={tintColor} />;
+      }
+
+      return null;
     },
+  }),
+  tabBarOptions: {
+    showLabel: false,
+    activeTintColor: '#4E65F6',
+    inactiveTintColor: 'gray',
   },
-  contentComponent: Drawer,
 });
 
-export default createAppContainer(Router);
+const MainRouter = createStackNavigator({
+  SplashScreen: {
+    screen: SplashScreen,
+    navigationOptions: {
+      header: null, /* hide header */
+    },
+  },
+  Services: {
+    screen: Services,
+    navigationOptions: {
+      header: null, /* hide header */
+    },
+  },
+  Authentication: {
+    screen: Authentication,
+    navigationOptions: {
+      header: null, /* hide header */
+    },
+  },
+  TabRouter: {
+    screen: TabRouter,
+    navigationOptions: {
+      header: null, /* hide header */
+    },
+  },
+});
+
+export default createAppContainer(MainRouter);
