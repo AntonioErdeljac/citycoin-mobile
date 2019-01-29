@@ -1,15 +1,18 @@
 import * as Animatable from 'react-native-animatable';
 import PropTypes from 'prop-types';
 import React from 'react';
-import { View, Text, ScrollView } from 'react-native';
-import { Header, Left, Input as NativeInput, Item } from 'native-base';
-import { CreditCardInput } from 'react-native-credit-card-single-page';
 import Stripe from 'react-native-stripe-api';
+import { CreditCardInput } from 'react-native-credit-card-single-page';
+import { Header, Left, Input as NativeInput, Item } from 'native-base';
+import { View, Text, ScrollView } from 'react-native';
+import { connect } from 'react-redux';
 
+import selectors from './selectors';
 import styles from './styles';
 
 import { Icon, SubmitButton, BackButton } from '../../common/components';
 
+import actions from '../../../actions';
 import { _t } from '../../../i18n';
 
 import images from '../../../../assets/images';
@@ -21,6 +24,7 @@ class WalletForm extends React.Component {
     this.state = {
       isDisabled: true,
       amount: '',
+      isLocallySubmitting: false,
     };
 
     this.mainRef = React.createRef();
@@ -41,7 +45,7 @@ class WalletForm extends React.Component {
 
   handleSubmit = () => {
     const { form, amount } = this.state;
-    const { updateWallet } = this.props;
+    const { updateWallet, currentUser, navigation } = this.props;
 
     const params = {
       number: form.values.number.replace(' ', ''),
@@ -52,15 +56,20 @@ class WalletForm extends React.Component {
 
     const client = new Stripe('pk_test_PPlSAZjUuQe8RKWU4D3MyRG2');
 
-    client.createToken(params)
-      .then((result) => {
-        updateWallet({ ...result, amount });
-      });
+    this.setState({
+      isLocallySubmitting: true,
+    }, () => {
+      client.createToken(params)
+        .then((result) => {
+          updateWallet(currentUser.walletId, { ...result, amount })
+            .then(() => navigation.navigate('WalletView'));
+        });
+    });
   }
 
   render() {
-    const { navigation } = this.props;
-    const { isDisabled, amount } = this.state;
+    const { navigation, isSubmitting } = this.props;
+    const { isDisabled, amount, isLocallySubmitting } = this.state;
 
     return (
       <View style={styles.container}>
@@ -98,7 +107,7 @@ class WalletForm extends React.Component {
                   autoCapitalize="none"
                 />
               </Item>
-              <SubmitButton onPress={this.handleSubmit} disabled={isDisabled || amount.length === 0} style={styles.buttonMargin} label="labels.submit" />
+              <SubmitButton isSubmitting={isSubmitting || isLocallySubmitting} onPress={this.handleSubmit} disabled={isDisabled || amount.length === 0} style={styles.buttonMargin} label="labels.submit" />
             </View>
           </ScrollView>
         </Animatable.View>
@@ -108,7 +117,15 @@ class WalletForm extends React.Component {
 }
 
 WalletForm.propTypes = {
+  currentUser: PropTypes.shape({}).isRequired,
+  isSubmitting: PropTypes.bool.isRequired,
   navigation: PropTypes.shape({}).isRequired,
+  updateWallet: PropTypes.func.isRequired,
 };
 
-export default WalletForm;
+export default connect(
+  selectors,
+  {
+    ...actions.wallet,
+  },
+)(WalletForm);

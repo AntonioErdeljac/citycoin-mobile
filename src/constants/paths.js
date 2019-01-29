@@ -13,6 +13,7 @@ export default {
   SERVICES_ID: '/api/v1/services/:id',
   SERVICES_ID_SUBSCRIPTIONS_ID: '/api/v1/services/:id/subscrptions/:subscriptionId',
   USERS_ID: '/api/v1/users/:id',
+  WALLETS_ID: '/api/v1/wallets/:id',
 
   STATIC_USER_PLACEHOLDER: `${config.server.uri}/static/user-placeholder.png`,
 };

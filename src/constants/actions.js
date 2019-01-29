@@ -28,4 +28,11 @@ export default keyMirror({
   USER_GET_FAILURE: null,
   USER_GET_REQUEST: null,
   USER_GET_SUCCESS: null,
+  WALLET_DATA_RESET: null,
+  WALLET_GET_FAILURE: null,
+  WALLET_GET_REQUEST: null,
+  WALLET_GET_SUCCESS: null,
+  WALLET_UPDATE_FAILURE: null,
+  WALLET_UPDATE_REQUEST: null,
+  WALLET_UPDATE_SUCCESS: null,
 });

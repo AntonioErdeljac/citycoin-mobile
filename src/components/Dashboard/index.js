@@ -29,13 +29,13 @@ class Dashboard extends React.Component {
   componentDidMount() {
     const { getCity } = this.props;
 
-    getCity('5c507e3a5290623855a7d1ce');
+    getCity('5c50afc56017bc15acbd656f');
   }
 
   loadView = () => {
     const { getCity } = this.props;
 
-    getCity('5c507e3a5290623855a7d1ce')
+    getCity('5c50afc56017bc15acbd656f')
       .then(() => {
         this.mainRef.fadeInDown();
       });
