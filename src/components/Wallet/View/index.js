@@ -1,4 +1,5 @@
 import * as Animatable from 'react-native-animatable';
+import PropTypes from 'prop-types';
 import React from 'react';
 import { View, Text, TouchableOpacity } from 'react-native';
 
@@ -16,6 +17,8 @@ class WalletView extends React.Component {
   }
 
   render() {
+    const { navigation } = this.props;
+
     return (
       <View style={styles.container}>
         <Animatable.View animation="fadeInDown" ref={(ref) => { this.mainRef = ref; }}>
@@ -31,7 +34,7 @@ class WalletView extends React.Component {
                   <Text style={styles.moneyText}>{_t('labels.amount')}</Text>
                   <Text style={styles.amountText}>$200</Text>
                 </View>
-                <TouchableOpacity style={styles.moneyButton}>
+                <TouchableOpacity onPress={() => navigation.navigate('WalletForm')} style={styles.moneyButton}>
                   <Icon.FontAwesome name="plus" color="white" size={15} />
                 </TouchableOpacity>
               </View>
@@ -42,5 +45,9 @@ class WalletView extends React.Component {
     );
   }
 }
+
+WalletView.propTypes = {
+  navigation: PropTypes.shape({}).isRequired,
+};
 
 export default WalletView;

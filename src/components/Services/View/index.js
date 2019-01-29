@@ -110,6 +110,8 @@ class ServicesView extends React.Component {
         .catch(() => {
           this.setState({
             isBuying: false,
+          }, () => {
+            navigation.navigate('WalletView');
           });
         });
     });

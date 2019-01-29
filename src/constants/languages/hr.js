@@ -22,6 +22,11 @@ export default {
     wallet: 'Novčanik',
     recentServices: 'Nedavne usluge',
     allServices: 'Sve usluge',
+    addMoney: 'Uplata',
+    submit: 'Potvrdi',
+    cardNumber: 'Broj kartice',
+    cardCCV: 'CCV kartice',
+    cardExpirationDate: 'Datum isteka kartice',
   },
   durationUnits: {
     day: 'Dan',
