@@ -2,7 +2,7 @@ export default {
   container: {
     backgroundColor: 'white',
     borderRadius: 5,
-    marginBottom: 10,
+    marginBottom: 20,
     padding: 15,
   },
 

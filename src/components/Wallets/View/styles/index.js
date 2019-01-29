@@ -56,7 +56,7 @@ export default {
   },
 
   walletBody: {
-    marginTop: 10,
+    marginTop: 30,
     backgroundColor: 'white',
     borderRadius: 5,
     padding: 15,

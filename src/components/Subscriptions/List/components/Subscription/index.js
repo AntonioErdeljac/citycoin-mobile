@@ -22,7 +22,7 @@ const Subscription = ({ subscription, service, navigation }) => (
       </View>
       <TouchableOpacity onPress={() => navigation.navigate('SubscriptionsView', { subscription, service })}>
         <View style={styles.buttonSelected}>
-          <Icon.Entypo name="chevron-right" color="white" size={15} />
+          <Icon.Ionicons name="md-qr-scanner" color="white" size={20} />
         </View>
       </TouchableOpacity>
     </View>

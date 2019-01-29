@@ -1,7 +1,7 @@
 import React from 'react';
 import { createAppContainer, createBottomTabNavigator, createStackNavigator } from 'react-navigation';
 
-import { Authentication, Dashboard, SplashScreen, Services, Subscriptions, Wallet } from '../components';
+import { Authentication, Dashboard, SplashScreen, Services, Subscriptions, Wallets } from '../components';
 import { Icon } from '../components/common/components';
 
 const TabRouter = createBottomTabNavigator({
@@ -9,7 +9,7 @@ const TabRouter = createBottomTabNavigator({
     screen: Dashboard,
   },
   Wallet: {
-    screen: Wallet,
+    screen: Wallets,
   },
   Subscriptions: {
     screen: Subscriptions,

@@ -2,6 +2,7 @@ import React from 'react';
 import thunk from 'redux-thunk';
 import { Provider } from 'react-redux';
 import { Root as NativeRoot } from 'native-base';
+import { StatusBar } from 'react-native';
 import { createStore, applyMiddleware } from 'redux';
 
 import Router from './router';

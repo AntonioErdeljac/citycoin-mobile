@@ -68,9 +68,13 @@ class Dashboard extends React.Component {
         <ScrollView>
           <View style={styles.itemWrapper}>
             <View style={styles.walletContainer}>
-              <Text style={styles.walletTitle}>{_t('labels.allServices')}</Text>
+              <Icon.Entypo name="shop" color="#4E65F6" size={60} />
+              <View>
+                <Text style={styles.walletTitle}>{_t('labels.allServices')}</Text>
+                <Text style={styles.walletSubtitle}>{city.services.length} {_t('labels.services')}</Text>
+              </View>
             </View>
-            <ScrollView style={[styles.mt10]}>
+            <ScrollView style={[styles.mt30]}>
               {servicesContent}
             </ScrollView>
           </View>

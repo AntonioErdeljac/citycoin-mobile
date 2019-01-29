@@ -26,6 +26,18 @@ export default {
     flexDirection: 'row',
   },
 
+  mt30: {
+    marginTop: 30,
+  },
+
+  walletSubtitle: {
+    fontFamily: 'Poppins-Medium',
+    color: 'rgba(0,0,0,.5)',
+    paddingTop: 5,
+    fontSize: 15,
+    paddingLeft: 20,
+  },
+
   headerImage: {
     borderWidth: 2,
     borderColor: 'white',
@@ -58,12 +70,16 @@ export default {
 
   walletContainer: {
     display: 'flex',
-    justifyContent: 'space-between',
+    justifyContent: 'flex-start',
+    alignItems: 'center',
     flexDirection: 'row',
   },
 
   walletTitle: {
-    color: '#2C2D4C', fontFamily: 'Poppins-Bold', fontSize: 25,
+    paddingLeft: 20,
+    color: '#2C2D4C',
+    fontFamily: 'Poppins-Bold',
+    fontSize: 25,
   },
 
   walletBody: {

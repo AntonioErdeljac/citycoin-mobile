@@ -3,7 +3,7 @@ import { createStackNavigator } from 'react-navigation';
 import Form from './Form';
 import View from './View';
 
-const walletRouter = createStackNavigator({
+const walletsRouter = createStackNavigator({
   WalletView: {
     screen: View,
   },
@@ -17,4 +17,4 @@ const walletRouter = createStackNavigator({
   },
 });
 
-export default walletRouter;
+export default walletsRouter;

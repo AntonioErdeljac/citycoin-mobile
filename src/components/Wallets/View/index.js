@@ -31,12 +31,17 @@ class WalletView extends React.Component {
     const { clearWalletState } = this.props;
 
     clearWalletState();
+
+    this.mainRef.fadeOutUp();
   }
 
   loadView = () => {
     const { currentUser, getWallet } = this.props;
 
-    getWallet(currentUser.walletId);
+    getWallet(currentUser.walletId)
+      .then(() => {
+        this.mainRef.fadeInDown();
+      });
   }
 
   render() {

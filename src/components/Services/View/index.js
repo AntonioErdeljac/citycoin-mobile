@@ -104,7 +104,7 @@ class ServicesView extends React.Component {
           this.setState({
             isBuying: false,
           }, () => {
-            navigation.navigate('Dashboard');
+            navigation.navigate('SubscriptionsList');
           });
         })
         .catch(() => {

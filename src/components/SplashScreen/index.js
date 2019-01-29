@@ -26,6 +26,7 @@ class SplashScreen extends React.Component {
         if (token) {
           loginByToken(token)
             .then(() => {
+              StatusBar.setBarStyle('dark-content');
               navigation.navigate('TabRouter');
             })
             .catch(() => {
