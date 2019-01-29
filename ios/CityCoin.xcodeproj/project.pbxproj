@@ -421,7 +421,7 @@
 			remoteGlobalIDString = 11FA5C511C4A1296003AC2EE;
 			remoteInfo = AirMaps;
 		};
-		7D7E28C922009750006A7F8F /* PBXContainerItemProxy */ = {
+		7D7E29292200BFAC006A7F8F /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = F208877328B24A54B914A26D /* TPSStripe.xcodeproj */;
 			proxyType = 2;
@@ -569,7 +569,6 @@
 				1E5BAF518D56467C94618B91 /* libRNVectorIcons.a in Frameworks */,
 				24B1A51AA0D4420C8F098A38 /* libSplashScreen.a in Frameworks */,
 				A7F77BA39F224EAFAE9B4197 /* libAirMaps.a in Frameworks */,
-				988279F1660D40A9973CCCB3 /* libTPSStripe.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -808,7 +807,7 @@
 				0637C75B531D4E75AB855A30 /* libRNVectorIcons-tvOS.a */,
 				D90B70071CEA4856888DBEE8 /* libSplashScreen.a */,
 				260F2B38ECAD4D8C86CEF10F /* libAirMaps.a */,
-				37527B7860CE409691A43540 /* libTPSStripe.a */,
+				C60AA44FD1D346A2BCBC8A04 /* libTPSStripe.a */,
 			);
 			name = "Recovered References";
 			sourceTree = "<group>";
@@ -874,7 +873,7 @@
 		7D7E289822009750006A7F8F /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				7D7E28CA22009750006A7F8F /* libTPSStripe.a */,
+				7D7E292A2200BFAC006A7F8F /* libTPSStripe.a */,
 			);
 			name = Products;
 			sourceTree = "<group>";

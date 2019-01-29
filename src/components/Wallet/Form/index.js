@@ -4,6 +4,7 @@ import React from 'react';
 import { View, Text, ScrollView } from 'react-native';
 import { Header, Left, Input as NativeInput, Item } from 'native-base';
 import { CreditCardInput } from 'react-native-credit-card-single-page';
+import Stripe from 'react-native-stripe-api';
 
 import styles from './styles';
 
@@ -26,17 +27,39 @@ class WalletForm extends React.Component {
   }
 
   onChange = (form) => {
-    const { amount } = this.state;
-
-    if (form.valid && amount.length > 0) {
+    if (form.valid) {
       this.setState({
         isDisabled: false,
+        form,
+      });
+    } else if (!form.valid) {
+      this.setState({
+        isDisabled: true,
       });
     }
   }
 
+  handleSubmit = () => {
+    const { form, amount } = this.state;
+    const { updateWallet } = this.props;
+
+    const params = {
+      number: form.values.number.replace(' ', ''),
+      exp_month: form.values.expiry.split('/')[0],
+      exp_year: form.values.expiry.split('/')[1],
+      cvc: form.values.cvc,
+    };
+
+    const client = new Stripe('pk_test_PPlSAZjUuQe8RKWU4D3MyRG2');
+
+    client.createToken(params)
+      .then((result) => {
+        updateWallet({ ...result, amount });
+      });
+  }
+
   render() {
-    const { isSubmitting, hasFailedToSubmit, navigation } = this.props;
+    const { navigation } = this.props;
     const { isDisabled, amount } = this.state;
 
     return (
@@ -64,8 +87,8 @@ class WalletForm extends React.Component {
               />
               <Item style={styles.innerContainer}>
                 <NativeInput
-                  disabled={isSubmitting}
                   placeholder={_t('labels.amount')}
+                  disabled={isDisabled}
                   onChangeText={text => this.setState({ amount: `${text.replace(/\D/g, '')}` })}
                   value={amount}
                   placeholderTextColor="rgba(0,0,0,.6)"
@@ -75,7 +98,7 @@ class WalletForm extends React.Component {
                   autoCapitalize="none"
                 />
               </Item>
-              <SubmitButton disabled={isDisabled} style={styles.buttonMargin} label="labels.submit" />
+              <SubmitButton onPress={this.handleSubmit} disabled={isDisabled || amount.length === 0} style={styles.buttonMargin} label="labels.submit" />
             </View>
           </ScrollView>
         </Animatable.View>
@@ -85,8 +108,7 @@ class WalletForm extends React.Component {
 }
 
 WalletForm.propTypes = {
-  hasFailedToSubmit: PropTypes.bool.isRequired,
-  isSubmitting: PropTypes.bool.isRequired,
+  navigation: PropTypes.shape({}).isRequired,
 };
 
 export default WalletForm;
