@@ -20,6 +20,8 @@ export default {
     subscriptions: 'Pretplate',
     total: 'Ukupan iznos',
     wallet: 'Novčanik',
+    recentServices: 'Nedavne usluge',
+    allServices: 'Sve usluge',
   },
   durationUnits: {
     day: 'Dan',

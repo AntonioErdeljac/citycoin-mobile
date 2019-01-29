@@ -19,6 +19,13 @@ export default {
     paddingTop: 5,
   },
 
+  servicesWrapper: {
+    display: 'flex',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    flexDirection: 'row',
+  },
+
   headerImage: {
     borderWidth: 2,
     borderColor: 'white',
@@ -27,6 +34,14 @@ export default {
   itemWrapper: {
     marginTop: 50,
     padding: 15,
+  },
+
+  userWrapper: {
+    marginTop: 30,
+    padding: 15,
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
   },
 
   headerBody: {

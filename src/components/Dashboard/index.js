@@ -29,13 +29,13 @@ class Dashboard extends React.Component {
   componentDidMount() {
     const { getCity } = this.props;
 
-    getCity('5c4b09a2d81016075fd27cb5');
+    getCity('5c5052cf0200e81d16875d55');
   }
 
   loadView = () => {
     const { getCity } = this.props;
 
-    getCity('5c4b09a2d81016075fd27cb5')
+    getCity('5c5052cf0200e81d16875d55')
       .then(() => {
         this.mainRef.fadeInDown();
       });
@@ -68,9 +68,9 @@ class Dashboard extends React.Component {
         <ScrollView>
           <View style={styles.itemWrapper}>
             <View style={styles.walletContainer}>
-              <Text style={styles.walletTitle}>{_t('labels.services')}</Text>
+              <Text style={styles.walletTitle}>{_t('labels.allServices')}</Text>
             </View>
-            <ScrollView style={styles.mt10}>
+            <ScrollView style={[styles.mt10]}>
               {servicesContent}
             </ScrollView>
           </View>
@@ -82,7 +82,6 @@ class Dashboard extends React.Component {
       <View style={styles.container}>
         <NavigationEvents
           onWillFocus={this.loadView}
-          // onWillBlur={this.purgeView}
         />
         <Animatable.View animation="fadeInDown" ref={(ref) => { this.mainRef = ref; }}>
           {content}

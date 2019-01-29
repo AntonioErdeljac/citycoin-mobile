@@ -20,7 +20,7 @@ const Subscription = ({ subscription, service, navigation }) => (
         <Text style={styles.servicePrice}>${subscription.price}</Text>
         <Text style={styles.servicePrice}>{subscription.duration} {subscription.duration === 1 ? _t(`durationUnits.${subscription.durationUnit.slice(0, -1)}`) : _t(`durationUnits.${subscription.durationUnit}`)}</Text>
       </View>
-      <TouchableOpacity onPress={() => navigation.navigate('SubscriptionsView')}>
+      <TouchableOpacity onPress={() => navigation.navigate('SubscriptionsView', { subscription, service })}>
         <View style={styles.buttonSelected}>
           <Icon.Entypo name="chevron-right" color="white" size={15} />
         </View>
