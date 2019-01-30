@@ -99,6 +99,14 @@ export default {
     paddingTop: 10,
   },
 
+  walletSubtitle: {
+    fontFamily: 'Poppins-Medium',
+    color: 'rgba(0,0,0,.5)',
+    paddingTop: 5,
+    fontSize: 15,
+    paddingLeft: 20,
+  },
+
   headerText: {
     fontFamily: 'Poppins-Bold',
     color: '#2C2D4C',

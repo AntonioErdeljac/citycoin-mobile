@@ -4,6 +4,14 @@ export default {
     backgroundColor: '#ecf0f1',
   },
 
+  walletSubtitle: {
+    fontFamily: 'Poppins-Medium',
+    color: 'rgba(0,0,0,.5)',
+    paddingTop: 5,
+    fontSize: 15,
+    paddingLeft: 20,
+  },
+
   loading: {
     display: 'flex',
     justifyContent: 'center',

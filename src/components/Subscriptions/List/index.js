@@ -53,6 +53,7 @@ class SubscriptionsList extends React.Component {
             <Icon.FontAwesome name="ticket" color="#4E65F6" size={60} />
             <View>
               <Text style={styles.serviceTitle}>{_t('labels.subscriptions')}</Text>
+              <Text style={styles.walletSubtitle}>{user.subscribedServices.length} {_t('labels.subscriptions')}</Text>
             </View>
           </View>
           <View style={styles.mt30}>

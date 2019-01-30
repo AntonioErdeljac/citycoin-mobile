@@ -20,7 +20,7 @@ const TabRouter = createBottomTabNavigator({
     tabBarIcon: ({ tintColor }) => {
       const { routeName } = navigation.state;
       if (routeName === 'Dashboard') {
-        return <Icon.FontAwesome name="home" size={25} color={tintColor} />;
+        return <Icon.Entypo name="shop" size={25} color={tintColor} />;
       }
 
       if (routeName === 'Subscriptions') {

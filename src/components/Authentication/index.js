@@ -30,6 +30,7 @@ class Authentication extends React.Component {
       isWelcomeVisible: false,
       isFormVisible: true,
       activeForm: 'login',
+      isNewUser: false,
     };
 
     this.mainRef = React.createRef();
@@ -64,19 +65,22 @@ class Authentication extends React.Component {
         });
     } else {
       register(values)
-        .then(() => {
-          this.mainRef.fadeOutUp()
+        .then(({ result }) => {
+          AsyncStorage.setItem('token', result.data.authentication.sessionToken)
             .then(() => {
-              this.setState({
-                isFormVisible: false,
-                activeForm: 'login',
-              }, () => {
-                this.setState({
-                  isFormVisible: true,
-                }, () => {
-                  this.mainRef.fadeInDown();
+              this.mainRef.fadeOutUp()
+                .then(() => {
+                  this.setState({
+                    isFormVisible: false,
+                  }, () => {
+                    this.setState({
+                      isWelcomeVisible: true,
+                      isNewUser: true,
+                    }, () => {
+                      this.mainRef.fadeInDown();
+                    });
+                  });
                 });
-              });
             });
         });
     }
@@ -123,10 +127,15 @@ class Authentication extends React.Component {
 
   handleNavigate = () => {
     const { navigation } = this.props;
+    const { isNewUser } = this.state;
 
     this.mainRef.fadeOutUp()
       .then(() => {
-        navigation.navigate('Dashboard');
+        if (isNewUser) {
+          navigation.navigate('WalletForm');
+        } else {
+          navigation.navigate('Dashboard');
+        }
       });
   }
 

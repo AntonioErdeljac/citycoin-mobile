@@ -53,10 +53,11 @@ const actionMap = {
     hasFailedToSubmit: false,
   }),
 
-  [actions.AUTHENTICATION_REGISTER_SUCCESS]: state => ({
+  [actions.AUTHENTICATION_REGISTER_SUCCESS]: (state, { result }) => ({
     ...state,
     isSubmitting: false,
     hasFailedToSubmit: false,
+    currentUser: result.data,
   }),
 
   [actions.AUTHENTICATION_REGISTER_FAILURE]: state => ({

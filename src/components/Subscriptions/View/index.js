@@ -15,8 +15,6 @@ import { BackButton, ServiceIcon } from '../../common/components';
 
 import actions from '../../../actions';
 
-import images from '../../../../assets/images';
-
 class SubscriptionsView extends React.Component {
   constructor() {
     super();
@@ -64,11 +62,12 @@ class SubscriptionsView extends React.Component {
             </View>
           </View>
           <View style={[styles.mt100, styles.flexCenter]}>
-            <View style={{ backgroundColor: 'white', borderRadius: 20, padding: 20 }}>
+            <View style={{ backgroundColor: '#4E65F6', borderRadius: 20, padding: 20 }}>
               <QRCode
                 value={subscribedService._id}
                 size={200}
-                logo={images.logo}
+                backgroundColor="#4E65F6"
+                color="white"
               />
             </View>
           </View>

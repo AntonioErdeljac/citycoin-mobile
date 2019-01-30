@@ -54,7 +54,10 @@ class WalletView extends React.Component {
         <View style={styles.itemWrapper}>
           <View style={styles.walletContainer}>
             <Icon.Entypo name="wallet" color="#4E65F6" size={60} />
-            <Text style={styles.walletTitle}>{_t('labels.wallet')}</Text>
+            <View>
+              <Text style={styles.walletTitle}>{_t('labels.wallet')}</Text>
+              <Text style={styles.walletSubtitle}>1 {_t('labels.wallet')}</Text>
+            </View>
           </View>
           <View style={styles.walletBody}>
             <Icon.Entypo name="wallet" color="#4E65F6" size={28} />
