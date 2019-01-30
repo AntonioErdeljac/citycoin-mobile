@@ -12,6 +12,7 @@ export default {
   CITIES_ID: '/api/v1/cities/:id',
   SERVICES_ID: '/api/v1/services/:id',
   SERVICES_ID_SUBSCRIPTIONS_ID: '/api/v1/services/:id/subscrptions/:subscriptionId',
+  SUBSCRIBED_SERVICES_ID: '/api/v1/subscribed-services/:id',
   USERS_ID: '/api/v1/users/:id',
   WALLETS_ID: '/api/v1/wallets/:id',
 

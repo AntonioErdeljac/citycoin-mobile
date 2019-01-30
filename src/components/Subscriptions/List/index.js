@@ -57,7 +57,7 @@ class SubscriptionsList extends React.Component {
           </View>
           <View style={styles.mt30}>
             {user.subscribedServices.map(subscribedService => (
-              <Subscription navigation={navigation} key={subscribedService._id} service={subscribedService.serviceId} subscription={subscribedService.subscriptionId} />
+              <Subscription navigation={navigation} key={subscribedService._id} id={subscribedService._id} service={subscribedService.serviceId} subscription={subscribedService.subscriptionId} />
             ))}
           </View>
         </View>

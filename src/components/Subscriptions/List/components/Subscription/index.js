@@ -8,7 +8,7 @@ import { Icon, ServiceIcon } from '../../../../common/components';
 
 import { _t } from '../../../../../i18n';
 
-const Subscription = ({ subscription, service, navigation }) => (
+const Subscription = ({ subscription, service, navigation, id }) => (
   <View style={styles.container}>
     <View style={styles.serviceNameContainer}>
       <ServiceIcon service={service} size={28} color="#4E65F6" />
@@ -20,7 +20,7 @@ const Subscription = ({ subscription, service, navigation }) => (
         <Text style={styles.servicePrice}>${subscription.price}</Text>
         <Text style={styles.servicePrice}>{subscription.duration} {subscription.duration === 1 ? _t(`durationUnits.${subscription.durationUnit.slice(0, -1)}`) : _t(`durationUnits.${subscription.durationUnit}`)}</Text>
       </View>
-      <TouchableOpacity onPress={() => navigation.navigate('SubscriptionsView', { subscription, service })}>
+      <TouchableOpacity onPress={() => navigation.navigate('SubscriptionsView', { id })}>
         <View style={styles.buttonSelected}>
           <Icon.Ionicons name="md-qr-scanner" color="white" size={20} />
         </View>
@@ -30,6 +30,7 @@ const Subscription = ({ subscription, service, navigation }) => (
 );
 
 Subscription.propTypes = {
+  id: PropTypes.string.isRequired,
   navigation: PropTypes.shape({}).isRequired,
   service: PropTypes.shape({}).isRequired,
   subscription: PropTypes.shape({}).isRequired,
