@@ -1,9 +1,10 @@
 import * as Animatable from 'react-native-animatable';
 import PropTypes from 'prop-types';
+import QRCode from 'react-native-qrcode-svg';
 import React from 'react';
 import { Header, Left } from 'native-base';
 import { NavigationEvents } from 'react-navigation';
-import { View, Text, Image, ActivityIndicator } from 'react-native';
+import { View, Text, ActivityIndicator } from 'react-native';
 import { connect } from 'react-redux';
 import { isEmpty } from 'lodash';
 
@@ -13,6 +14,8 @@ import styles from './styles';
 import { BackButton, ServiceIcon } from '../../common/components';
 
 import actions from '../../../actions';
+
+import images from '../../../../assets/images';
 
 class SubscriptionsView extends React.Component {
   constructor() {
@@ -61,11 +64,11 @@ class SubscriptionsView extends React.Component {
             </View>
           </View>
           <View style={[styles.mt100, styles.flexCenter]}>
-            <View style={{ alignSelf: 'center', backgroundColor: 'ecf0f1', borderRadius: 10, width: 300, height: 300 }}>
-              <Image
-                source={{ uri: 'https://cdn.qrstuff.com/images/default_qrcode.png' }}
-                resizeMode="cover"
-                style={{ borderRadius: 10, height: '100%', width: '100%' }}
+            <View style={{ backgroundColor: 'white', borderRadius: 20, padding: 20 }}>
+              <QRCode
+                value={subscribedService._id}
+                size={200}
+                logo={images.logo}
               />
             </View>
           </View>

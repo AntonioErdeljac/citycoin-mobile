@@ -12,9 +12,9 @@ export default {
   CITIES_ID: '/api/v1/cities/:id',
   SERVICES_ID: '/api/v1/services/:id',
   SERVICES_ID_SUBSCRIPTIONS_ID: '/api/v1/services/:id/subscrptions/:subscriptionId',
+  STATIC_USER_PLACEHOLDER: `${config.server.uri}/static/user-placeholder.png`,
   SUBSCRIBED_SERVICES_ID: '/api/v1/subscribed-services/:id',
+  SUBSCRIBED_SERVICES_ID_VERIFICATION: '/api/v1/subscribed-services/:id/verification',
   USERS_ID: '/api/v1/users/:id',
   WALLETS_ID: '/api/v1/wallets/:id',
-
-  STATIC_USER_PLACEHOLDER: `${config.server.uri}/static/user-placeholder.png`,
 };
