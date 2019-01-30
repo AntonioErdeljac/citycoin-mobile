@@ -1,6 +1,7 @@
-import PropTypes from 'prop-types';
-import React from 'react';
 import NativeSplashScreen from 'react-native-splash-screen';
+import PropTypes from 'prop-types';
+import Geolocation from 'react-native-geolocation-service';
+import React from 'react';
 import { View, AsyncStorage, StatusBar, Image, ImageBackground } from 'react-native';
 import { connect } from 'react-redux';
 
@@ -26,8 +27,14 @@ class SplashScreen extends React.Component {
         if (token) {
           loginByToken(token)
             .then(() => {
-              StatusBar.setBarStyle('dark-content');
-              navigation.navigate('TabRouter');
+              Geolocation.getCurrentPosition(
+                () => {
+                  StatusBar.setBarStyle('dark-content');
+                  navigation.navigate('TabRouter');
+                },
+                () => {},
+                { enableHighAccuracy: true, timeout: 15000, maximumAge: 10000 },
+              );
             })
             .catch(() => {
               AsyncStorage.clear()
