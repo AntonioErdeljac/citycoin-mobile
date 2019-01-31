@@ -30,7 +30,6 @@ class Authentication extends React.Component {
       isWelcomeVisible: false,
       isFormVisible: true,
       activeForm: 'login',
-      isNewUser: false,
     };
 
     this.mainRef = React.createRef();
@@ -75,7 +74,6 @@ class Authentication extends React.Component {
                   }, () => {
                     this.setState({
                       isWelcomeVisible: true,
-                      isNewUser: true,
                     }, () => {
                       this.mainRef.fadeInDown();
                     });
@@ -127,15 +125,10 @@ class Authentication extends React.Component {
 
   handleNavigate = () => {
     const { navigation } = this.props;
-    const { isNewUser } = this.state;
 
     this.mainRef.fadeOutUp()
       .then(() => {
-        if (isNewUser) {
-          navigation.navigate('WalletForm');
-        } else {
-          navigation.navigate('Dashboard');
-        }
+        navigation.navigate('Cities');
       });
   }
 

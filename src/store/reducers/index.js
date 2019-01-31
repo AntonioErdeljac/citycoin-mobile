@@ -1,6 +1,7 @@
 import { combineReducers } from 'redux';
 
 import authentication from './authentication';
+import cities from './cities';
 import city from './city';
 import service from './service';
 import subscribedService from './subscribedService';
@@ -9,6 +10,7 @@ import wallet from './wallet';
 
 export default combineReducers({
   authentication,
+  cities,
   city,
   service,
   subscribedService,

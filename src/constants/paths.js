@@ -10,6 +10,7 @@ export default {
   AUTHENTICATION_LOGIN: '/api/v1/authentication/login',
   AUTHENTICATION_REGISTER: '/api/v1/authentication/registration',
   CITIES_ID: '/api/v1/cities/:id',
+  CITIES: '/api/v1/cities',
   SERVICES_ID: '/api/v1/services/:id',
   SERVICES_ID_SUBSCRIPTIONS_ID: '/api/v1/services/:id/subscrptions/:subscriptionId',
   STATIC_USER_PLACEHOLDER: `${config.server.uri}/static/user-placeholder.png`,

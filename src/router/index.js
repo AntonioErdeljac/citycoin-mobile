@@ -1,7 +1,7 @@
 import React from 'react';
 import { createAppContainer, createBottomTabNavigator, createStackNavigator } from 'react-navigation';
 
-import { Authentication, Dashboard, SplashScreen, Services, Subscriptions, Wallets } from '../components';
+import { Authentication, Dashboard, SplashScreen, Services, Subscriptions, Wallets, Cities } from '../components';
 import { Icon } from '../components/common/components';
 
 const TabRouter = createBottomTabNavigator({
@@ -45,25 +45,31 @@ const MainRouter = createStackNavigator({
   SplashScreen: {
     screen: SplashScreen,
     navigationOptions: {
-      header: null, /* hide header */
+      header: null,
     },
   },
   Services: {
     screen: Services,
     navigationOptions: {
-      header: null, /* hide header */
+      header: null,
     },
   },
   Authentication: {
     screen: Authentication,
     navigationOptions: {
-      header: null, /* hide header */
+      header: null,
+    },
+  },
+  Cities: {
+    screen: Cities,
+    navigationOptions: {
+      header: null,
     },
   },
   TabRouter: {
     screen: TabRouter,
     navigationOptions: {
-      header: null, /* hide header */
+      header: null,
     },
   },
 });

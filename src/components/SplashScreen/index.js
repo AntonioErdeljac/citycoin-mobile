@@ -18,7 +18,7 @@ class SplashScreen extends React.Component {
   }
 
   componentDidMount() {
-    const { navigation, loginByToken } = this.props;
+    const { navigation, loginByToken, getCities } = this.props;
 
     NativeSplashScreen.hide();
 
@@ -28,9 +28,12 @@ class SplashScreen extends React.Component {
           loginByToken(token)
             .then(() => {
               Geolocation.getCurrentPosition(
-                () => {
-                  StatusBar.setBarStyle('dark-content');
-                  navigation.navigate('TabRouter');
+                (position) => {
+                  getCities({ longitude: position.coords.longitude, latitude: position.coords.latitude })
+                    .then(() => {
+                      StatusBar.setBarStyle('dark-content');
+                      navigation.navigate('Cities');
+                    });
                 },
                 () => {},
                 { enableHighAccuracy: true, timeout: 15000, maximumAge: 10000 },
@@ -72,13 +75,15 @@ class SplashScreen extends React.Component {
 }
 
 SplashScreen.propTypes = {
-  navigation: PropTypes.shape({}).isRequired,
+  getCities: PropTypes.func.isRequired,
   loginByToken: PropTypes.func.isRequired,
+  navigation: PropTypes.shape({}).isRequired,
 };
 
 export default connect(
   null,
   {
     ...actions.authentication,
+    ...actions.cities,
   },
 )(SplashScreen);
