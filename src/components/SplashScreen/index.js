@@ -1,6 +1,5 @@
 import NativeSplashScreen from 'react-native-splash-screen';
 import PropTypes from 'prop-types';
-import Geolocation from 'react-native-geolocation-service';
 import React from 'react';
 import { View, AsyncStorage, StatusBar, Image, ImageBackground } from 'react-native';
 import { connect } from 'react-redux';
@@ -18,7 +17,7 @@ class SplashScreen extends React.Component {
   }
 
   componentDidMount() {
-    const { navigation, loginByToken, getCities } = this.props;
+    const { navigation, loginByToken } = this.props;
 
     NativeSplashScreen.hide();
 
@@ -27,17 +26,8 @@ class SplashScreen extends React.Component {
         if (token) {
           loginByToken(token)
             .then(() => {
-              Geolocation.getCurrentPosition(
-                (position) => {
-                  getCities({ longitude: position.coords.longitude, latitude: position.coords.latitude })
-                    .then(() => {
-                      StatusBar.setBarStyle('dark-content');
-                      navigation.navigate('Cities');
-                    });
-                },
-                () => {},
-                { enableHighAccuracy: true, timeout: 15000, maximumAge: 10000 },
-              );
+              StatusBar.setBarStyle('dark-content');
+              navigation.navigate('Cities');
             })
             .catch(() => {
               AsyncStorage.clear()
@@ -75,7 +65,6 @@ class SplashScreen extends React.Component {
 }
 
 SplashScreen.propTypes = {
-  getCities: PropTypes.func.isRequired,
   loginByToken: PropTypes.func.isRequired,
   navigation: PropTypes.shape({}).isRequired,
 };
@@ -84,6 +73,5 @@ export default connect(
   null,
   {
     ...actions.authentication,
-    ...actions.cities,
   },
 )(SplashScreen);

@@ -19,11 +19,28 @@ export default {
     paddingTop: 5,
   },
 
+  citiesWrapper: {
+    display: 'flex',
+    justifyContent: 'flex-start',
+    alignItems: 'center',
+    flexDirection: 'row',
+  },
+
   servicesWrapper: {
     display: 'flex',
     justifyContent: 'space-between',
     alignItems: 'center',
     flexDirection: 'row',
+  },
+
+  citiesButton: {
+    height: 50,
+    width: 50,
+    borderRadius: 50,
+    backgroundColor: '#4E65F6',
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
   },
 
   mt30: {
@@ -70,7 +87,7 @@ export default {
 
   walletContainer: {
     display: 'flex',
-    justifyContent: 'flex-start',
+    justifyContent: 'space-between',
     alignItems: 'center',
     flexDirection: 'row',
   },

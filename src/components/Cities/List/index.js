@@ -1,4 +1,5 @@
 import * as Animatable from 'react-native-animatable';
+import Geolocation from 'react-native-geolocation-service';
 import PropTypes from 'prop-types';
 import React from 'react';
 import { NavigationEvents } from 'react-navigation';
@@ -22,22 +23,38 @@ class CitiesList extends React.Component {
     this.mainRef = React.createRef();
   }
 
-  // componentDidMount() {
-  //   const { getUser, currentUser } = this.props;
+  componentDidMount() {
+    const { getCities } = this.props;
 
-  //   getUser(currentUser._id);
-  // }
+    Geolocation.getCurrentPosition(
+      (position) => {
+        getCities({ longitude: position.coords.longitude, latitude: position.coords.latitude });
+      },
+      () => {},
+      { enableHighAccuracy: true, timeout: 15000, maximumAge: 10000 },
+    );
+  }
 
-  // loadList = () => {
-  //   const { getCities } = this.props;
+  loadList = () => {
+    const { getCities } = this.props;
 
-  //   getCities(currentUser._id)
-  //     .then(() => {
-  //       this.mainRef.fadeInDown();
-  //     });
-  // }
+    Geolocation.getCurrentPosition(
+      (position) => {
+        getCities({ longitude: position.coords.longitude, latitude: position.coords.latitude })
+          .then(() => {
+            this.mainRef.fadeInDown();
+          });
+      },
+      () => {},
+      { enableHighAccuracy: true, timeout: 15000, maximumAge: 10000 },
+    );
+  }
 
   purgeList = () => {
+    const { clearCitiesState } = this.props;
+
+    clearCitiesState();
+
     this.mainRef.fadeOutUp();
   }
 
@@ -76,7 +93,10 @@ class CitiesList extends React.Component {
 
     return (
       <View style={styles.container}>
-        <NavigationEvents />
+        <NavigationEvents
+          onWillBlur={this.purgeList}
+          onWillFocus={this.loadList}
+        />
         <Animatable.View ref={(ref) => { this.mainRef = ref; }}>
           <ScrollView>
             {content}
@@ -89,6 +109,8 @@ class CitiesList extends React.Component {
 
 CitiesList.propTypes = {
   cities: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
+  clearCitiesState: PropTypes.func.isRequired,
+  getCities: PropTypes.func.isRequired,
   getCity: PropTypes.func.isRequired,
   hasFailedToLoad: PropTypes.bool.isRequired,
   isLoading: PropTypes.bool.isRequired,

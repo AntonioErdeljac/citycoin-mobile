@@ -1,13 +1,14 @@
 import * as Animatable from 'react-native-animatable';
 import PropTypes from 'prop-types';
 import React from 'react';
-import { ActivityIndicator, View, Text, ScrollView } from 'react-native';
+import { ActivityIndicator, View, Text, ScrollView, TouchableOpacity } from 'react-native';
 import { NavigationEvents } from 'react-navigation';
 import { connect } from 'react-redux';
 import { isEmpty } from 'lodash';
-import selectors from './selectors';
-import styles from './styles';
+
 import { Service } from './components';
+import styles from './styles';
+import selectors from './selectors';
 
 import { Icon } from '../common/components';
 
@@ -68,11 +69,16 @@ class Dashboard extends React.Component {
         <ScrollView>
           <View style={styles.itemWrapper}>
             <View style={styles.walletContainer}>
-              <Icon.Entypo name="shop" color="#4E65F6" size={60} />
-              <View>
-                <Text style={styles.walletTitle}>{_t('labels.allServices')}</Text>
-                <Text style={styles.walletSubtitle}>{city.services.length} {_t('labels.services')}</Text>
+              <View style={styles.citiesWrapper}>
+                <Icon.Entypo name="shop" color="#4E65F6" size={60} />
+                <View>
+                  <Text style={styles.walletTitle}>{_t('labels.allServices')}</Text>
+                  <Text style={styles.walletSubtitle}>{city.services.length} {_t('labels.services')}</Text>
+                </View>
               </View>
+              <TouchableOpacity onPress={() => navigation.navigate('CitiesList')} style={styles.citiesButton}>
+                <Icon.MaterialCommunityIcons name="city-variant" color="white" size={30} />
+              </TouchableOpacity>
             </View>
             <ScrollView style={[styles.mt30]}>
               {servicesContent}
