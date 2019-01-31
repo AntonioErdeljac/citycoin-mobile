@@ -27,7 +27,7 @@ export default {
     submit: 'Potvrdi',
     subscriptions: 'Pretplate',
     total: 'Ukupan iznos',
-    totalCities: 'Gradova',
+    totalCities: 'Grada',
     wallet: 'Novčanik',
   },
   durationUnits: {

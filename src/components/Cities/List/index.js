@@ -97,7 +97,7 @@ class CitiesList extends React.Component {
           onWillBlur={this.purgeList}
           onWillFocus={this.loadList}
         />
-        <Animatable.View ref={(ref) => { this.mainRef = ref; }}>
+        <Animatable.View animation="fadeInDown" ref={(ref) => { this.mainRef = ref; }}>
           <ScrollView>
             {content}
           </ScrollView>

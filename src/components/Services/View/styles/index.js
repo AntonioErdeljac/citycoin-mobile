@@ -45,6 +45,7 @@ export default {
     padding: 15,
     borderRadius: 5,
     backgroundColor: 'white',
+    marginBottom: 20,
   },
 
   footerButton: {

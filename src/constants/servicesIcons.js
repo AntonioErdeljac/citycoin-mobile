@@ -35,4 +35,8 @@ export default {
     icon: 'coin',
     type: 'MaterialCommunityIcons',
   },
+  EDUCATION: {
+    icon: 'graduation-cap',
+    type: 'FontAwesome',
+  },
 };

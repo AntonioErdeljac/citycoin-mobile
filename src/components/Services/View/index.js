@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import { Left, Header } from 'native-base';
 import { NavigationEvents } from 'react-navigation';
-import { ScrollView, View, Text, ActivityIndicator, TouchableOpacity } from 'react-native';
+import { ScrollView, View, Text, ActivityIndicator } from 'react-native';
 import { connect } from 'react-redux';
 import { isEmpty } from 'lodash';
 
@@ -11,7 +11,7 @@ import selectors from './selectors';
 import styles from './styles';
 import { Subscription } from './components';
 
-import { ServiceIcon, BackButton } from '../../common/components';
+import { ServiceIcon, BackButton, SubmitButton } from '../../common/components';
 import actions from '../../../actions';
 import { _t } from '../../../i18n';
 
@@ -158,6 +158,12 @@ class ServicesView extends React.Component {
           <View style={styles.mt30}>
             {innerContent}
           </View>
+          <SubmitButton
+            onPress={showCheckoutForm ? this.handleBuy : this.handleConfirm}
+            label={showCheckoutForm ? 'labels.purchase' : 'labels.confirm'}
+            disabled={!selectedSubscription}
+            isSubmitting={isBuying}
+          />
         </View>
       );
     }
@@ -177,12 +183,6 @@ class ServicesView extends React.Component {
             {content}
           </ScrollView>
         </Animatable.View>
-        <TouchableOpacity onPress={showCheckoutForm ? this.handleBuy : this.handleConfirm} style={selectedSubscription ? styles.footerButton : styles.footerButtonDisabled} disabled={!selectedSubscription}>
-          {isBuying
-            ? <ActivityIndicator />
-            : <Text style={styles.footerButtonText}>{showCheckoutForm ? _t('labels.purchase') : _t('labels.confirm')}</Text>
-            }
-        </TouchableOpacity>
       </View>
     );
   }
