@@ -10,6 +10,7 @@ const initialValues = {
   personal: {
     firstName: '',
     lastName: '',
+    nin: '',
   },
 };
 
@@ -28,6 +29,8 @@ const validations = Yup.object().shape({
     firstName: Yup.string()
       .required('Required'),
     lastName: Yup.string()
+      .required('Required'),
+    nin: Yup.string()
       .required('Required'),
   }),
 });

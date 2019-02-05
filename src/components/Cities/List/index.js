@@ -91,6 +91,20 @@ class CitiesList extends React.Component {
       );
     }
 
+    if (!hasFailedToLoad && !isLoading && isEmpty(cities)) {
+      content = (
+        <View style={styles.itemWrapper}>
+          <View style={styles.walletContainer}>
+            <Icon.MaterialCommunityIcons name="city-variant" color="#4E65F6" size={60} />
+            <View>
+              <Text style={styles.serviceTitle}>{_t('labels.cities')}</Text>
+              <Text style={styles.walletSubtitle}>{totalCities} {_t('labels.totalCities')}</Text>
+            </View>
+          </View>
+        </View>
+      );
+    }
+
     return (
       <View style={styles.container}>
         <NavigationEvents
