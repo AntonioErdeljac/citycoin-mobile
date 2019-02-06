@@ -125,18 +125,18 @@ class ServicesView extends React.Component {
           <View style={styles.formContainer}>
             <View style={styles.formItem}>
               <View>
-                <Text style={styles.formItemTitle}>{selectedSubscription.description}</Text>
+                <Text style={styles.formItemTitle}>{selectedSubscription.general.name}</Text>
                 <Text style={styles.formItemSubtitle}>
-                  {selectedSubscription.duration} {selectedSubscription.duration === 1 ? _t(`durationUnits.${selectedSubscription.durationUnit.slice(0, -1)}`) : _t(`durationUnits.${selectedSubscription.durationUnit}`)}
+                  {selectedSubscription.general.duration} {selectedSubscription.general.duration === 1 ? _t(`durationUnits.${selectedSubscription.general.durationUnit}`) : _t(`durationUnits.${selectedSubscription.general.durationUnit}s`)}
                 </Text>
               </View>
               <View>
-                <Text style={styles.formItemPrice}>${selectedSubscription.price}</Text>
+                <Text style={styles.formItemPrice}>${selectedSubscription.general.price}</Text>
               </View>
             </View>
             <View style={styles.formTotal}>
               <Text style={styles.formItemTitle}>{_t('labels.total')}</Text>
-              <Text style={styles.formItemPrice}>${selectedSubscription.price}</Text>
+              <Text style={styles.formItemPrice}>${selectedSubscription.general.price}</Text>
             </View>
           </View>
         )

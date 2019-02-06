@@ -16,9 +16,9 @@ const Subscription = ({ subscription, service, navigation, id }) => (
     </View>
     <View style={styles.innerContainer}>
       <View>
-        <Text style={styles.serviceName}>{subscription.description}</Text>
-        <Text style={styles.servicePrice}>${subscription.price}</Text>
-        <Text style={styles.servicePrice}>{subscription.duration} {subscription.duration === 1 ? _t(`durationUnits.${subscription.durationUnit.slice(0, -1)}`) : _t(`durationUnits.${subscription.durationUnit}`)}</Text>
+        <Text style={styles.serviceName}>{subscription.general.description}</Text>
+        <Text style={styles.servicePrice}>${subscription.general.price}</Text>
+        <Text style={styles.servicePrice}>{subscription.general.duration} {subscription.general.duration === 1 ? _t(`durationUnits.${subscription.general.durationUnit}`) : _t(`durationUnits.${subscription.general.durationUnit}s`)}</Text>
       </View>
       <TouchableOpacity onPress={() => navigation.navigate('SubscriptionsView', { id })}>
         <View style={styles.buttonSelected}>

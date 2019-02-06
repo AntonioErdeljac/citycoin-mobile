@@ -13,9 +13,9 @@ const Subscription = ({ subscription, toggleSubscription, selectedSubscription }
     <Icon.FontAwesome name="ticket" size={28} color="#4E65F6" />
     <View style={styles.innerContainer}>
       <View>
-        <Text style={styles.serviceName}>{subscription.description}</Text>
-        <Text style={styles.servicePrice}>${subscription.price}</Text>
-        <Text style={styles.servicePrice}>{subscription.duration} {subscription.duration === 1 ? _t(`durationUnits.${subscription.durationUnit.slice(0, -1)}`) : _t(`durationUnits.${subscription.durationUnit}`)}</Text>
+        <Text style={styles.serviceName}>{subscription.general.name}</Text>
+        <Text style={styles.servicePrice}>${subscription.general.price}</Text>
+        <Text style={styles.servicePrice}>{subscription.general.duration} {subscription.general.duration === 1 ? _t(`durationUnits.${subscription.general.durationUnit}`) : _t(`durationUnits.${subscription.general.durationUnit}s`)}</Text>
       </View>
       {selectedSubscription && selectedSubscription._id === subscription._id
         ? (
