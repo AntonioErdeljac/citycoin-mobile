@@ -4,7 +4,7 @@ import QRCode from 'react-native-qrcode-svg';
 import React from 'react';
 import { Header, Left } from 'native-base';
 import { NavigationEvents } from 'react-navigation';
-import { View, Text, ActivityIndicator } from 'react-native';
+import { View, Text, ActivityIndicator, Image } from 'react-native';
 import { connect } from 'react-redux';
 import { isEmpty } from 'lodash';
 
@@ -62,6 +62,11 @@ class SubscriptionsView extends React.Component {
             </View>
           </View>
           <View style={[styles.mt100, styles.flexCenter]}>
+            <View style={{ marginTop: 15, marginBottom: 15 }}>
+              <Image
+                source={{ uri: 'link-to-img' }}
+              />
+            </View>
             <View style={{ backgroundColor: '#4E65F6', borderRadius: 20, padding: 20 }}>
               <QRCode
                 value={subscribedService._id}

@@ -1,5 +1,5 @@
 const server = {
-  uri: 'http://localhost:3000',
+  uri: 'http://2736ddd7.ngrok.io',
 };
 
 export default {

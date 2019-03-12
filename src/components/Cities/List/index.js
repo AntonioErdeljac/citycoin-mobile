@@ -3,7 +3,7 @@ import Geolocation from 'react-native-geolocation-service';
 import PropTypes from 'prop-types';
 import React from 'react';
 import { NavigationEvents } from 'react-navigation';
-import { View, ScrollView, ActivityIndicator, Text } from 'react-native';
+import { View, ScrollView, ActivityIndicator, Text, RefreshControl } from 'react-native';
 import { connect } from 'react-redux';
 import { isEmpty } from 'lodash';
 
@@ -20,6 +20,10 @@ class CitiesList extends React.Component {
   constructor() {
     super();
 
+    this.state = {
+      isRefreshing: false,
+    };
+
     this.mainRef = React.createRef();
   }
 
@@ -33,6 +37,30 @@ class CitiesList extends React.Component {
       () => {},
       { enableHighAccuracy: true, timeout: 15000, maximumAge: 10000 },
     );
+  }
+
+  handleRefresh = () => {
+    const { getCities } = this.props;
+
+    this.setState({
+      isRefreshing: true,
+    }, () => {
+      Geolocation.getCurrentPosition(
+        (position) => {
+          getCities({ longitude: position.coords.longitude, latitude: position.coords.latitude })
+            .then(() => {
+              this.mainRef.fadeInDown()
+                .then(() => {
+                  this.setState({
+                    isRefreshing: false,
+                  });
+                });
+            });
+        },
+        () => {},
+        { enableHighAccuracy: true, timeout: 15000, maximumAge: 10000 },
+      );
+    });
   }
 
   loadList = () => {
@@ -69,6 +97,7 @@ class CitiesList extends React.Component {
 
   render() {
     const { hasFailedToLoad, isLoading, cities, totalCities } = this.props;
+    const { isRefreshing } = this.state;
 
     let content = <View style={styles.loading}><ActivityIndicator /></View>;
 
@@ -112,7 +141,14 @@ class CitiesList extends React.Component {
           onWillFocus={this.loadList}
         />
         <Animatable.View animation="fadeInDown" ref={(ref) => { this.mainRef = ref; }}>
-          <ScrollView>
+          <ScrollView
+            refreshControl={(
+              <RefreshControl
+                refreshing={isRefreshing}
+                onRefresh={this.handleRefresh}
+              />
+            )}
+          >
             {content}
           </ScrollView>
         </Animatable.View>
